@@ -131,3 +131,22 @@ def test_linked_list_search_returns_input_value():
         l.push('n')
     searching = randint(1, n)
     assert l.search(searching) == searching
+
+
+def test_linked_list_accepts_iterables():
+    """."""
+    from linked_list import LinkedList
+    the_list = [1, 2, 3, 4, 5]
+    l = LinkedList(the_list)
+    for item in the_list:
+        assert l.search(item).data == item
+
+        
+def test_linked_list_accepts_each_iterable_value():
+    """."""
+    from linked_list import LinkedList
+    the_list = [1, 2, 3, 4, 5]
+    l = LinkedList(the_list)
+    for item in the_list:
+        assert l.search(item).data == item
+
