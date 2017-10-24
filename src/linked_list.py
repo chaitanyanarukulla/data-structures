@@ -19,20 +19,12 @@ class Node(object):
 
 
 class LinkedList(object):
-    def __init__(self, *args):
-        if not args:
-            self.head = None
-            self.size = 0
-            print('size')
-        else:
-            self.head = None
-            self.size = 0
-            for arg in args:
-                new_node = Node(arg)
-                new_node.set_next(self.head)
-                self.head = new_node
-                self.size += 1
-                print('another size')
+    def __init__(self, iterable=()):
+        self.head = None
+        self.size = 0
+        if isinstance(iterable, (str, tuple, list)):
+            for item in iterable:
+                self.push(item)
 
 
     def push(self, val):
@@ -43,6 +35,8 @@ class LinkedList(object):
 
 
     def pop(self):
+        if self.head is None:
+            raise IndexError('This is an empty list. No values to pop.')
         current = self.head
         self.head = current.get_next()
         self.size -= 1
@@ -93,8 +87,8 @@ class LinkedList(object):
 
 
     def __str__(self):
-        self.display()
+        return self.display()
 
 
     def __len__(self):
-        self.size()
+        return self.size()
