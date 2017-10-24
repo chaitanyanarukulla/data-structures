@@ -19,9 +19,20 @@ class Node(object):
 
 
 class LinkedList(object):
-    def __init__(self, head = None):
-        self.head = head
-        self.size = 0
+    def __init__(self, *args):
+        if not args:
+            self.head = None
+            self.size = 0
+            print('size')
+        else:
+            self.head = None
+            self.size = 0
+            for arg in args:
+                new_node = Node(arg)
+                new_node.set_next(self.head)
+                self.head = new_node
+                self.size += 1
+                print('another size')
 
 
     def push(self, val):
