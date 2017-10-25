@@ -29,9 +29,13 @@ class LinkedList(object):
     """This function creates instance of LinkedList"""
         self.head = None
         self._size = 0
-        if isinstance(iterable, (str, tuple, list)):
+        if isinstance(iterable, (tuple, list)):
             for item in iterable:
                 self.push(item)
+        elif isinstance(iterable, (str, int)):
+            self.push(iterable)
+        else:
+            self.head = Node()
 
 
     def push(self, val):
@@ -91,13 +95,16 @@ class LinkedList(object):
 
     def display(self):
     """This function displays the data in str of tuples"""
-        print_list = []
+        print_list = '('
         current = self.head
         while current:
-            print_list.append(current.get_data())
+            if current.get_next():
+                print_list = print_list + str(current.data) + ', '
+            else:
+                print_list = print_list + str(current.data) + ')'
             current = current.get_next()
-        print(str(tuple(print_list)))
-        return tuple(print_list)
+        print(print_list)
+        return print_list
 
 
     def __str__(self):

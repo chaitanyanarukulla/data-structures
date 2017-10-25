@@ -182,7 +182,7 @@ def test_linked_list_display_returns_tuple_of_list_values():
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    assert l.display() == (5, 4, 3, 2, 1)
+    assert l.display() == '(5, 4, 3, 2, 1)'
 
 
 def test_linked_list_len_returns_list_length():
