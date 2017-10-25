@@ -18,3 +18,4 @@ class Stack(object):
 
     def __len__(self):
         return self.func._size
+s
