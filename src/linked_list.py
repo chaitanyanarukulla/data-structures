@@ -22,9 +22,13 @@ class LinkedList(object):
     def __init__(self, iterable=()):
         self.head = None
         self._size = 0
-        if isinstance(iterable, (str, tuple, list)):
+        if isinstance(iterable, (tuple, list)):
             for item in iterable:
                 self.push(item)
+        elif isinstance(iterable, (str, int)):
+            self.push(iterable)
+        else:
+            self.head = Node()
 
 
     def push(self, val):
