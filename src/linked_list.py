@@ -78,13 +78,16 @@ class LinkedList(object):
 
 
     def display(self):
-        print_list = []
+        print_list = '('
         current = self.head
         while current:
-            print_list.append(current.get_data())
+            if current.get_next():
+                print_list = print_list + str(current.data) + ', '
+            else:
+                print_list = print_list + str(current.data) + ')'
             current = current.get_next()
-        print(str(tuple(print_list)))
-        return tuple(print_list)
+        print(print_list)
+        return print_list
 
 
     def __str__(self):
