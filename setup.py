@@ -12,8 +12,8 @@ setup(
         'testing': ['pytest', 'pytest-cov', 'pytest-watch', 'tox'],
         'development': ['ipython']
     },
-    entry_points={
-        'console_scripts': [
-        ]
-    }
+    # entry_points={
+    #     'console_scripts': [
+    #     ]
+    # }
 )

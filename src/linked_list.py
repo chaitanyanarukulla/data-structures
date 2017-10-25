@@ -1,9 +1,9 @@
 """DATA"""
 
 class Node(object):
-    def __init__(self, data = None, next_node = None):
+    def __init__(self, data = None, next = None):
         self.data = data
-        self.next_node = next_node
+        self.next = next
 
 
     def get_data(self):
@@ -21,7 +21,7 @@ class Node(object):
 class LinkedList(object):
     def __init__(self, iterable=()):
         self.head = None
-        self.size = 0
+        self._size = 0
         if isinstance(iterable, (str, tuple, list)):
             for item in iterable:
                 self.push(item)
@@ -31,7 +31,7 @@ class LinkedList(object):
         new_node = Node(val)
         new_node.set_next(self.head)
         self.head = new_node
-        self.size += 1
+        self._size += 1
 
 
     def pop(self):
@@ -39,13 +39,13 @@ class LinkedList(object):
             raise IndexError('This is an empty list. No values to pop.')
         current = self.head
         self.head = current.get_next()
-        self.size -= 1
+        self._size -= 1
         return current
 
 
     def size(self):
-        print(self.size)
-        return self.size
+        print(self._size)
+        return self._size
 
 
     def search(self, val):
@@ -66,10 +66,10 @@ class LinkedList(object):
             if current.get_data() == data:
                 if current == self.head:
                     self.head = current.get_next()
-                    self.size -= 1
+                    self._size -= 1
                 else:
                     prev.set_next(current.get_next())
-                    self.size -= 1
+                    self._size -= 1
                 return current
             prev = current
             current = current.get_next()
@@ -84,11 +84,12 @@ class LinkedList(object):
             print_list.append(current.get_data())
             current = current.get_next()
         print(str(tuple(print_list)))
+        return tuple(print_list)
 
 
     def __str__(self):
-        return self.display()
+        return str(self.display())
 
 
     def __len__(self):
-        return self.size()
+        return self._size
