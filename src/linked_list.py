@@ -1,32 +1,32 @@
-"""DATA Structure for linked list"""
+"""DATA Structure for linked list."""
+
 
 class Node(object):
-    """This create a class of Node"""
-    def __init__(self, data = None, next = None):
-    """This function creates instance of class Node"""
+    """Create a class of Node."""
+
+    def __init__(self, data=None, next=None):
+        """Create instance of class Node."""
         self.data = data
         self.next = next
 
-
     def get_data(self):
-    """This function  sets  self  to data"""
+        """Set self to data."""
         return self.data
 
-
     def get_next(self):
-    """This function  return next of data"""
+        """Return next of data."""
         return self.next
 
-
     def set_next(self, new_next):
-     """This function  sets data to next data"""
+        """Set data to next data."""
         self.next = new_next
 
 
 class LinkedList(object):
-    """This create a class of LinkedList"""
+    """Create a class of LinkedList."""
+
     def __init__(self, iterable=()):
-    """This function creates instance of LinkedList"""
+        """Create instance of LinkedList."""
         self.head = None
         self._size = 0
         if isinstance(iterable, (tuple, list)):
@@ -37,17 +37,15 @@ class LinkedList(object):
         else:
             self.head = Node()
 
-
     def push(self, val):
-        """This function creates new node and makes it a head"""
+        """Create new node and makes it a head."""
         new_node = Node(val)
         new_node.set_next(self.head)
         self.head = new_node
         self._size += 1
 
-
     def pop(self):
-    """This function delets the first node and mkes next node a head"""
+        """Delete the first node and make next node a head."""
         if self.head is None:
             raise IndexError('This is an empty list. No values to pop.')
         current = self.head
@@ -55,15 +53,13 @@ class LinkedList(object):
         self._size -= 1
         return current
 
-
     def size(self):
-    """This function returns the length"""
+        """Return the length."""
         print(self._size)
         return self._size
 
-
     def search(self, val):
-    """This function searchs the val"""
+        """Search the list."""
         current = self.head
         while current:
             if current.get_data() == val:
@@ -73,9 +69,8 @@ class LinkedList(object):
                 current = current.get_next()
         return None
 
-
     def remove_node(self, data):
-    """This function serches the value and removes a node of that value and links the between nodes"""
+        """Search and removes node of that value, then links adjecent nodes."""
         current = self.head
         prev = None
         while current:
@@ -92,9 +87,8 @@ class LinkedList(object):
         else:
             raise ValueError('Your node does not exist in this linked list.')
 
-
     def display(self):
-    """This function displays the data in str of tuples"""
+        """Display the data in str looking tuple."""
         print_list = '('
         current = self.head
         while current:
@@ -106,11 +100,10 @@ class LinkedList(object):
         print(print_list)
         return print_list
 
-
     def __str__(self):
-    """This function returns the displays of data in str of tuples"""
+        """Display of data in str looking tuple."""
         return str(self.display())
 
-
     def __len__(self):
+        """Display size of list."""
         return self._size
