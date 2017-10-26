@@ -3,13 +3,6 @@ import pytest
 from stack import Stack
 
 
-# @pytest.fixture()
-# def empty_stack():
-#     """Build an empty stack for testing."""
-#     s = Stack()
-#     return s
-
-
 def test_create_stack_len_at_0():
     """Check if len returns stack length at 0."""
     s = Stack()
@@ -51,6 +44,13 @@ def test_stack_pop_returns_head(val, result):
     """Check if len returns stack length."""
     s = Stack(val)
     assert s.pop() == result
+
+
+def test_stack_pop_on_empty_stack():
+    """Check for exception message on empty stack."""
+    s = Stack()
+    with pytest.raises(IndexError):
+        s.pop()
 
 
 PUSH = [
