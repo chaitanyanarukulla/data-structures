@@ -10,7 +10,7 @@ def test_node_has_attributes():
     assert hasattr(new, 'next')
 
 
-def test_linked_list_has_head():
+def test_empty_linked_list_has_no_head():
     """New linked list should have a head."""
     from linked_list import LinkedList
     l = LinkedList()

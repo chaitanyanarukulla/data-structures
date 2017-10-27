@@ -25,7 +25,7 @@ class Node(object):
 class LinkedList(object):
     """Create a class of LinkedList."""
 
-    def __init__(self, iterable=None:
+    def __init__(self, iterable=None):
         """Create instance of LinkedList."""
         self.head = None
         self._size = 0
@@ -34,8 +34,6 @@ class LinkedList(object):
                 self.push(item)
         elif isinstance(iterable, (str, int)):
             self.push(iterable)
-        else:
-            self.head = Node()
 
     def push(self, val):
         """Create new node and makes it a head."""
