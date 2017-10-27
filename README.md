@@ -71,3 +71,31 @@ Additionally, LinkedList will interact with these built-in Python functions:
 * _len(new)_ - returns the size of the list.
 
 ```
+
+### Doubly Linked List Class Usage
+
+```
+To create an instance of a Dll() class contained in package, from python:
+
+new = Dll() *you may not call Dll() with any parameters.*
+
+Dll() contains the following methods:
+* _push(val) (O1)_ - will insert the value ‘val’ at the head of the list.
+* _append(val) (O1)_ - will insert the value ‘val’ at the tail of the list.
+* _pop() (O1)_ - will pop the first value off the head of the stack and return it. Raises an exception with an appropriate message if there are no values to return.
+* _shift() (O1)_ - will remove the last value off the tail of the list and return it. Raises an exception with an appropriate message if there are no values to return.
+* _remove(node) (On)_ - will remove the given node from the list, wherever it might be (node must be an item in the list). If the node is not in the list, it will raise an exception with an appropriate message.
+
+
+To access any contained methods:
+new.push(val)
+new.append(val)
+new.pop()
+new.shift()
+new.remove()
+
+Additionally, LinkedList will interact with these built-in Python functions:
+
+* _len(new)_ - returns the size of the list.
+
+```
