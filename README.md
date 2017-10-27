@@ -99,3 +99,28 @@ Additionally, LinkedList will interact with these built-in Python functions:
 * _len(new)_ - returns the size of the list.
 
 ```
+
+### Queue Class Usage
+
+```
+To create an instance of a Queue() class contained in package, from python:
+
+new = Queue() *you may not call Queue() with any parameters.*
+
+Queue() contains the following methods:
+* _enqueue(val) (O1)_ - will insert the value ‘val’ at the end of the queue.
+* _dequeue() (O1)_ - will remove the last value off the front of the queue and return it. Raises an exception with an appropriate message if there are no values to return.
+* _peek() (O1)_ - shows the value of the node at the end of the queue.
+* _size() (O1)_ - displays the number of node in the queue.
+
+To access any contained methods:
+new.enqueue(val)
+new.dequeue()
+new.peek()
+new.size()
+
+Additionally, Queue will interact with these built-in Python functions:
+
+* _len(new)_ - returns the size of the list.
+
+```

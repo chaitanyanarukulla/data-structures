@@ -20,7 +20,7 @@ class Queue(object):
         except IndexError:
             raise IndexError('There are no nodes to dequeue.')
 
-    def peak(self):
+    def peek(self):
         """Return the value of the next node to be removed."""
         return self.func.tail.data
 
