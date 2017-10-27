@@ -44,7 +44,7 @@ new.search(val)
 new.remove(node)
 new.display()
 
-Additionally, LinkedList will interact with these built-in Python functions:
+Additionally, LinkedList() will interact with these built-in Python functions:
 
 * _len(new)_ - returns the size of the list.
 * _print(new)_ - returns what the display() method returns.
@@ -66,7 +66,7 @@ To access any contained methods:
 new.push(val)
 new.pop()
 
-Additionally, LinkedList will interact with these built-in Python functions:
+Additionally, Stack() will interact with these built-in Python functions:
 
 * _len(new)_ - returns the size of the list.
 
@@ -94,7 +94,7 @@ new.pop()
 new.shift()
 new.remove()
 
-Additionally, LinkedList will interact with these built-in Python functions:
+Additionally, Dll() will interact with these built-in Python functions:
 
 * _len(new)_ - returns the size of the list.
 
