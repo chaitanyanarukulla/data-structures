@@ -25,7 +25,7 @@ class Node(object):
 class LinkedList(object):
     """Create a class of LinkedList."""
 
-    def __init__(self, iterable=()):
+    def __init__(self, iterable=None:
         """Create instance of LinkedList."""
         self.head = None
         self._size = 0
