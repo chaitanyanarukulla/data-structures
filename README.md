@@ -67,6 +67,7 @@ new.push(val)
 new.pop()
 
 Additionally, Stack() will interact with these built-in Python functions:
+<<<<<<< HEAD
 
 * _len(new)_ - returns the size of the list.
 
@@ -95,6 +96,8 @@ new.shift()
 new.remove()
 
 Additionally, Dll() will interact with these built-in Python functions:
+=======
+>>>>>>> stack
 
 * _len(new)_ - returns the size of the list.
 
