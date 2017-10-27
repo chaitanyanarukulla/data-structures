@@ -67,7 +67,6 @@ new.push(val)
 new.pop()
 
 Additionally, Stack() will interact with these built-in Python functions:
-<<<<<<< HEAD
 
 * _len(new)_ - returns the size of the list.
 
@@ -87,7 +86,6 @@ Dll() contains the following methods:
 * _shift() (O1)_ - will remove the last value off the tail of the list and return it. Raises an exception with an appropriate message if there are no values to return.
 * _remove(node) (On)_ - will remove the given node from the list, wherever it might be (node must be an item in the list). If the node is not in the list, it will raise an exception with an appropriate message.
 
-
 To access any contained methods:
 new.push(val)
 new.append(val)
@@ -96,8 +94,6 @@ new.shift()
 new.remove()
 
 Additionally, Dll() will interact with these built-in Python functions:
-=======
->>>>>>> stack
 
 * _len(new)_ - returns the size of the list.
 
