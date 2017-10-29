@@ -176,6 +176,13 @@ def test_dll_remove_node_removes_input_value():
     assert l.remove(3).data == 3
 
 
+def test_dll_remove_node_removes_head_value():
+    """Test Dll to remove head."""
+    l = Dll()
+    l.push('val')
+    assert l.remove('val').data == 'val'
+
+
 def test_linked_list_remove_node_raises_valueerror_if_input_not_exist():
     """Test Dll to remove node raises ValueError if input not exist."""
     l = Dll()
