@@ -2,8 +2,6 @@
 
 import pytest
 
-from que_ import Queue
-
 
 def test_create_queue_len_at_0(eq):
     """Check if len returns Q length at 0."""
