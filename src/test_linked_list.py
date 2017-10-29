@@ -67,7 +67,7 @@ def test_linked_list_pop_with_multiple_items_in_list():
     l = LinkedList()
     l.push('val')
     l.push('val2')
-    former_head = l.pop()
+    l.pop()
     assert l.head.data == 'val'
 
 
@@ -98,7 +98,7 @@ def test_linked_list_size_returns_list_length(n):
 
 @pytest.mark.parametrize('n', range(20))
 def test_linked_list_len_uses_length_function(n):
-    """Test Linked List should successfully interact with the len() in Python."""
+    """Test Linked List should successfully interact with the len()."""
     from linked_list import LinkedList
     l = LinkedList()
     for i in range(n):
