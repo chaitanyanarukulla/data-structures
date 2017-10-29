@@ -10,7 +10,7 @@ class Queue(object):
         self.func = Dll()
 
     def enqueue(self, val):
-        """Push an item or iterable into stack."""
+        """Push an item into stack."""
         return self.func.push(val)
 
     def dequeue(self):
@@ -22,7 +22,10 @@ class Queue(object):
 
     def peek(self):
         """Return the value of the next node to be removed."""
-        return self.func.tail.data
+        try:
+            return self.func.tail.data
+        except AttributeError:
+            return None
 
     def size(self):
         """Return the size."""
