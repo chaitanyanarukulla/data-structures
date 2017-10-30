@@ -132,8 +132,8 @@ def test_dll_shift_returns_removed_tail():
     """Test Dll for pop function if it returns proper head."""
     l = Dll()
     l.push('val')
-    former_head = l.shift()
-    assert former_head.data == 'val'
+    former_tail = l.shift()
+    assert former_tail.data == 'val'
 
 
 def test_dll__with_multiple_items_in_list():
