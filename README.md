@@ -123,3 +123,30 @@ Additionally, Queue will interact with these built-in Python functions:
 * _len(new)_ - returns the size of the list.
 
 ```
+
+### Deque Class Usage
+
+```
+To create an instance of a Deque() class contained in package, from python:
+
+new = Deque() *you may not call Deque() with any parameters.*
+
+Deque() contains the following methods:
+* _append(val) (O1)_ - will insert the value ‘val’ at the end of the deque.
+* _appendleft() (O1)_ - will insert a value to the front of the deque.
+*_pop() (01)_ - removes the first val from the end of the deque.
+*_popleft() (01)_ - removes the first val from the front of the deque.
+* _peek() (O1)_ - shows the value of the item at the end of the deque.
+* _peekleft() (O1)_ - shows the value of the item at the font of the deque.
+* _size() (O1)_ - displays the number items in the deque.
+
+To access any contained methods:
+new.append(val)
+new.appendleft(val)
+new.pop()
+new.popleft()
+new.peek()
+new.peekleft()
+new.size()
+
+```

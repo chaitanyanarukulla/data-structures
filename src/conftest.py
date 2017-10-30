@@ -7,3 +7,10 @@ def eq():
     """Initialize an empty queue."""
     from que_ import Queue
     return Queue()
+
+
+@pytest.fixture
+def ed():
+    """Initialize an empty deque."""
+    from deque_ import Deque
+    return Deque()
