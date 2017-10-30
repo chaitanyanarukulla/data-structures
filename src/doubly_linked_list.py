@@ -66,24 +66,32 @@ class Dll(object):
 
     def pop(self):
         """Remove current head of list."""
+        current = self.head
         if self.head is None:
             raise IndexError('This is an empty list. No values to pop.')
-        current = self.head
-        self.head = current.get_next()
-        if self.head:
+        elif self._size == 1:
+            self.tail = None
+            self.head = None
+            self._size -= 1
+        elif self._size > 1:
+            self.head = current.get_next()
             self.head.set_prve(None)
-        self._size -= 1
+            self._size -= 1
         return current
 
     def shift(self):
         """Remove current tail of list."""
-        if self.head is None:
-            raise IndexError('This is an empty list. No values to shift.')
         current = self.tail
-        self.tail = current.get_prve()
-        if self.tail:
+        if self.tail is None:
+            raise IndexError('This is an empty list. No values to shift.')
+        elif self._size == 1:
+            self.tail = None
+            self.head = None
+            self._size -= 1
+        elif self._size > 1:
+            self.tail = current.get_prve()
             self.tail.set_next(None)
-        self._size -= 1
+            self._size -= 1
         return current
 
     def remove(self, val):
