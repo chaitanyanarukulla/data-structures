@@ -156,7 +156,7 @@ def test_linked_list_remove_removes_input_value():
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    assert l.remove(3).data == 3
+    assert l.remove(l.search(3)).data == 3
 
 
 def test_linked_list_remove_removes_sets_next_as_head():
@@ -164,7 +164,7 @@ def test_linked_list_remove_removes_sets_next_as_head():
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    l.remove(5)
+    l.remove(l.search(5))
     assert l.head.data == 4
 
 
