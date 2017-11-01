@@ -53,7 +53,6 @@ class LinkedList(object):
 
     def size(self):
         """Return the length."""
-        print(self._size)
         return self._size
 
     def search(self, val):
@@ -61,18 +60,17 @@ class LinkedList(object):
         current = self.head
         while current:
             if current.get_data() == val:
-                print('current')
                 return current
             else:
                 current = current.get_next()
         return None
 
-    def remove_node(self, data):
+    def remove(self, node):
         """Search and removes node of that value, then links adjecent nodes."""
         current = self.head
         prev = None
         while current:
-            if current.get_data() == data:
+            if current == node:
                 if current == self.head:
                     self.head = current.get_next()
                     self._size -= 1
@@ -95,7 +93,6 @@ class LinkedList(object):
             else:
                 print_list = print_list + str(current.data) + ')'
             current = current.get_next()
-        print(print_list)
         return print_list
 
     def __str__(self):

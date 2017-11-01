@@ -67,7 +67,7 @@ def test_linked_list_pop_with_multiple_items_in_list():
     l = LinkedList()
     l.push('val')
     l.push('val2')
-    former_head = l.pop()
+    l.pop()
     assert l.head.data == 'val'
 
 
@@ -98,7 +98,7 @@ def test_linked_list_size_returns_list_length(n):
 
 @pytest.mark.parametrize('n', range(20))
 def test_linked_list_len_uses_length_function(n):
-    """Test Linked List should successfully interact with the len() in Python."""
+    """Test Linked List should successfully interact with the len()."""
     from linked_list import LinkedList
     l = LinkedList()
     for i in range(n):
@@ -151,30 +151,30 @@ def test_linked_list_accepts_each_iterable_value():
         assert l.search(item).data == item
 
 
-def test_linked_list_remove_node_removes_input_value():
+def test_linked_list_remove_removes_input_value():
     """Test Linked List to remove node by value."""
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    assert l.remove_node(3).data == 3
+    assert l.remove(l.search(3)).data == 3
 
 
-def test_linked_list_remove_node_removes_sets_next_as_head():
+def test_linked_list_remove_removes_sets_next_as_head():
     """Test Linked List to remove node removes sets next as head."""
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    l.remove_node(5)
+    l.remove(l.search(5))
     assert l.head.data == 4
 
 
-def test_linked_list_remove_node_raises_valueerror_if_input_not_exist():
+def test_linked_list_remove_raises_valueerror_if_input_not_exist():
     """Test Linked List to remove node raises ValueError if input not exist."""
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
     with pytest.raises(ValueError):
-        l.remove_node(7)
+        l.remove(7)
 
 
 def test_linked_list_display_returns_tuple_of_list_values():
