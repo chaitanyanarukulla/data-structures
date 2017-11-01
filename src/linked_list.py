@@ -70,7 +70,7 @@ class LinkedList(object):
         current = self.head
         prev = None
         while current:
-            if current.get_data() == node:
+            if current == node:
                 if current == self.head:
                     self.head = current.get_next()
                     self._size -= 1
