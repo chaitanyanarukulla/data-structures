@@ -151,30 +151,30 @@ def test_linked_list_accepts_each_iterable_value():
         assert l.search(item).data == item
 
 
-def test_linked_list_remove_node_removes_input_value():
+def test_linked_list_remove_removes_input_value():
     """Test Linked List to remove node by value."""
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    assert l.remove_node(3).data == 3
+    assert l.remove(3).data == 3
 
 
-def test_linked_list_remove_node_removes_sets_next_as_head():
+def test_linked_list_remove_removes_sets_next_as_head():
     """Test Linked List to remove node removes sets next as head."""
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
-    l.remove_node(5)
+    l.remove(5)
     assert l.head.data == 4
 
 
-def test_linked_list_remove_node_raises_valueerror_if_input_not_exist():
+def test_linked_list_remove_raises_valueerror_if_input_not_exist():
     """Test Linked List to remove node raises ValueError if input not exist."""
     from linked_list import LinkedList
     the_list = [1, 2, 3, 4, 5]
     l = LinkedList(the_list)
     with pytest.raises(ValueError):
-        l.remove_node(7)
+        l.remove(7)
 
 
 def test_linked_list_display_returns_tuple_of_list_values():

@@ -61,13 +61,12 @@ class LinkedList(object):
         current = self.head
         while current:
             if current.get_data() == val:
-                print('current')
                 return current
             else:
                 current = current.get_next()
         return None
 
-    def remove_node(self, data):
+    def remove(self, data):
         """Search and removes node of that value, then links adjecent nodes."""
         current = self.head
         prev = None
@@ -95,7 +94,6 @@ class LinkedList(object):
             else:
                 print_list = print_list + str(current.data) + ')'
             current = current.get_next()
-        print(print_list)
         return print_list
 
     def __str__(self):
