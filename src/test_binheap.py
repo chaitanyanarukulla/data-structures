@@ -53,7 +53,7 @@ def test_pop_twice_on_heap_with_one_item(ebh):
         ebh.pop()
 
 
-def test_pop_returns_sorted_values(ebh):
+def test_pop_returns_sorted_values():
     """Test pop entire bin returns sorted values."""
     from binheap import Binheap
     import random
@@ -63,3 +63,16 @@ def test_pop_returns_sorted_values(ebh):
     # import pdb; pdb.set_trace()
     all_popped = [heap.pop() for i in range(heap._size)]
     assert all_popped == sorted(rand_nums)
+
+
+def test_pop_returns_sorted_values_limited(ebh):
+    """Test pop in controlled environment."""
+    ebh.push(23),
+    ebh.push(2),
+    ebh.push(30),
+    ebh.push(50),
+    ebh.push(6),
+    ebh.push(17),
+    ebh.push(29)
+    all_popped = [ebh.pop() for i in range(7)]
+    assert all_popped == [2, 6, 17, 23, 29, 30, 50]

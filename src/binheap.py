@@ -1,4 +1,4 @@
-"""Binary heap."""
+"""Binary heap class."""
 
 
 class Binheap(object):
@@ -17,10 +17,10 @@ class Binheap(object):
         if type(val) == int or type(val) == float:
             self.heaplist.append(val)
             self._size += 1
-            if self._size > 1:
-                sort_up = True
-                idx = self._size - 1
-                while sort_up:
+            sort_up = True
+            idx = self._size - 1
+            while sort_up:
+                if idx > 0:
                     if idx % 2 == 0:
                         parent = (idx - 2) // 2
                     else:
@@ -31,6 +31,8 @@ class Binheap(object):
                         idx = parent
                     else:
                         sort_up = False
+                else:
+                    sort_up = False
         else:
             raise ValueError('You must input numbers only.')
 
@@ -50,33 +52,29 @@ class Binheap(object):
             while sort_down:
                 l_child = idx * 2 + 1
                 r_child = idx * 2 + 2
-                if self.heaplist[l_child] and self.heaplist[l_child]:
+                if r_child <= self._size - 1 and l_child <= self._size - 1:
                     if self.heaplist[l_child] > self.heaplist[r_child]:
                         if self.heaplist[r_child] < self.heaplist[idx]:
-                            temp_val = self.heaplist[idx]
-                            self.heaplist[idx] = self.heaplist[r_child]
-                            self.heaplist[r_child] = temp_val
+                            self.heaplist[r_child], self.heaplist[idx] =\
+                                self.heaplist[idx], self.heaplist[r_child]
                             idx = r_child
                         else:
                             sort_down = False
                     else:
                         if self.heaplist[l_child] < self.heaplist[r_child]:
-                            temp_val = self.heaplist[idx]
-                            self.heaplist[idx] = self.heaplist[l_child]
-                            self.heaplist[l_child] = temp_val
-                            idx = l_child
-                        else:
-                            sort_down = False
-                elif self.heaplist[l_child] and not self.heaplist[r_child]:
-                    if self.heaplist[l_child] < self.heaplist[r_child]:
-                            temp_val = self.heaplist[idx]
-                            self.heaplist[idx] = self.heaplist[l_child]
-                            self.heaplist[l_child] = temp_val
-                            sort_down = False
-                elif self.heaplist[r_child] and not self.heaplist[l_child]:
-                    if self.heaplist[r_child] < self.heaplist[idx]:
-                            temp_val = self.heaplist[idx]
-                            self.heaplist[idx] = self.heaplist[r_child]
-                            self.heaplist[r_child] = temp_val
-                            sort_down = False
+                            if self.heaplist[l_child] < self.heaplist[idx]:
+                                self.heaplist[idx], self.heaplist[l_child] =\
+                                    self.heaplist[l_child], self.heaplist[idx]
+                                idx = l_child
+                            else:
+                                sort_down = False
+                elif l_child == self._size - 1:
+                    if self.heaplist[l_child] < self.heaplist[idx]:
+                        self.heaplist[idx], self.heaplist[l_child] =\
+                            self.heaplist[l_child], self.heaplist[idx]
+                        sort_down = False
+                    else:
+                        sort_down = False
+                else:
+                    sort_down = False
             return pop_val
