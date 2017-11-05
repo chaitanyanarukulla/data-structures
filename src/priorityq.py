@@ -26,21 +26,16 @@ class Priorityq(object):
         if len(self._que) == 0:
             raise IndexError('There are no value to pop.')
         else:
-            self._que[self._highest].pop(0)
+            val = self._que[self._highest].pop(0)
             if self._que[self._highest] == []:
                 self._que.pop(self._highest)
                 if len(self._que) == 0:
                     self._highest = 0
                     self._lowest = 0
-                high = max(self._highest)
-                self._highest = high
-            if self._que[self._lowest] == []:
-                self._que.pop(self._lowest)
-                if len(self._que) == 0:
-                    self._lowest = 0
-                    self._lowest = 0
-                high = max(self._lowest)
-                self._highest = high
+                else:
+                    high = min(self._que)
+                    self._highest = high
+            return val
 
     def peek(self):
         """View the hightest priority item."""

@@ -167,3 +167,22 @@ new.push(val)
 new.pop()
 
 ```
+
+### Priorityq (Priorityq) Class Usage
+
+```
+To create an instance of a Priorityq() class contained in package, from python:
+
+new = Priorityq() *you may call Priorityq() with any uniqe number or iterable of unique numbers.*
+
+Priorityq() contains the following methods:
+*_insert(val,priority) (O1)_ - will insert the value ‘val’ at the end of the heap.
+*_pop() (01)_ - removes the higest priority and returns the higest priority.
+*_peek() (01)_ - returns the higest priority.
+
+To access any contained methods:
+new.insert(val)
+new.pop()
+new.peek()
+
+```
