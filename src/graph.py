@@ -46,7 +46,7 @@ class Graph(object):
             for key in self._graph:
                 for i in self._graph[key]:
                     if i == val:
-                        i.remove(val)
+                        self._graph[key].remove(val)
         else:
             raise ValueError('There is no node of that value in the graph.')
 
@@ -62,12 +62,9 @@ class Graph(object):
 
     def has_node(self, val):
         """Return true or false if node has value."""
-        try:
-            if val in self._graph:
-                return True
-            else:
-                return False
-        except KeyError:
+        if val in self._graph:
+            return True
+        else:
             return False
 
     def neighbors(self, val):
