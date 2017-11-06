@@ -10,36 +10,37 @@ class Graph(object):
 
     def nodes(self):
         """Return a list of all nodes in graph."""
-        return self._graph.keys()
+        return list(self._graph.keys())
 
     def edges(self):
         """Return a list of edges in graph."""
         edges = []
         for key in self._graph:
-            for i in key:
+            print(edges)
+            for i in self._graph[key]:
                 edges.append((key, i))
         return edges
 
     def add_node(self, val):
         """Add a node with value of val to graph."""
-        self._graph[val]
+        self._graph[val] = []
 
     def add_edge(self, val1, val2):
         """Add a new edge to graph between val1 & val2 as well as add vals."""
         if val1 in self._graph and val2 in self._graph:
             if val2 not in self._graph[val1]:
                 self._graph[val1].append(val2)
-            if val1 not in self._graph[val2]:
-                self._graph[val2].append(val1)
+                print(self._graph[val1])
         if val1 in self._graph and val2 not in self._graph:
+            self._graph[val2] = []
             self._graph[val1].append(val2)
-            self._graph[val2] = [val1]
         if val2 in self._graph and val1 not in self._graph:
-            self._graph[val2].append(val1)
-            self._graph[val1] = [val2]
+            self._graph[val1] = []
+            self._graph[val1].append(val2)
         else:
             self._graph[val1] = [val2]
-            self._graph[val2] = [val1]
+            self._graph[val2] = []
+
 
     def del_node(self, val):
         """Delete node w/val from graph, raises exception if not exist."""

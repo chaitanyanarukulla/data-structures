@@ -14,3 +14,10 @@ def pq():
     """Initialize a empty pq."""
     from priorityq import Priorityq
     return Priorityq()
+
+
+@pytest.fixture
+def g():
+    """Initialize a empty pq."""
+    from graph import Graph
+    return Graph()
