@@ -108,7 +108,7 @@ class Dll(object):
                     npn.set_next(nnn)
                     nnn.set_prve(npn)
                     self._size -= 1
-                return current.data
+                return None
             current = current.get_next()
         else:
             raise ValueError('Your node does not exist in this linked list.')
