@@ -24,7 +24,6 @@ def test_add_node_returns_list_of_all_nodes(g):
     assert type(g.nodes()) == list
 
 
-
 def test_edges_return_list_of_tuples_of_all_edges(g):
     """Test if edges returns list of tuples with pairings of each edge."""
     g.add_node(5)
@@ -99,16 +98,6 @@ def test_del_node_deletes_the_node_given(g):
     """Test del node delets the node."""
     g.add_node(5)
     g.add_node(7)
-    g.add_node(9)
-    g.del_node(7)
-    assert 7 not in g.nodes()
-
-
-def test_del_node_deletes_the_node_given(g):
-    """Test del node delets the node."""
-    g.add_node(5)
-    g.add_node(7)
-    g.add_edge(5, 7)
     g.add_node(9)
     g.del_node(7)
     assert 7 not in g.nodes()
@@ -258,6 +247,70 @@ def test_df_raises_value_error_node_not_exist(g):
 
 def test_depth_first_many_node_many_edges(g):
     """Test depth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_node(7)
+    g.add_node(8)
+    g.add_node(9)
+    g.add_edge(5, 9)
+    g.add_edge(6, 9)
+    g.add_edge(7, 8)
+    g.add_edge(8, 5)
+    g.add_edge(9, 5)
+    g.add_edge(9, 6)
+    g.add_edge(9, 8)
+    g.add_edge(6, 5)
+    g.add_edge(7, 5)
+    g.add_edge(8, 9)
+    g.add_edge(6, 8)
+    assert g.depth_first_traversal(8) == [8, 9, 6, 5]
+
+
+def test_breadth_first_one_node_many_edges(g):
+    """Test breadth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_node(7)
+    g.add_node(8)
+    g.add_node(9)
+    g.add_edge(5, 6)
+    g.add_edge(5, 7)
+    g.add_edge(5, 8)
+    g.add_edge(5, 9)
+    assert g.breadth_first_traversal(5) == [5, 6, 7, 8, 9]
+
+
+def test_breadth_first_node_no_edge_return_only_self(g):
+    """Test breadth first traversal returns start val if no edges."""
+    g.add_node(8)
+    g.add_node(9)
+    g.add_node(10)
+    g.add_edge(10, 8)
+    assert g.depth_first_traversal(8) == [8]
+
+
+def test_breadth_first_one_edge_per_node(g):
+    """Test breadth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_node(7)
+    g.add_node(8)
+    g.add_node(9)
+    g.add_edge(5, 6)
+    g.add_edge(6, 7)
+    g.add_edge(7, 8)
+    g.add_edge(8, 9)
+    assert g.depth_first_traversal(5) == [5, 6, 7, 8, 9]
+
+
+def test_bf_raises_value_error_node_not_exist(g):
+    """Test bf traversal raises value error if val not in graph."""
+    with pytest.raises(ValueError):
+        g.depth_first_traversal('blerg')
+
+
+def test_bf_first_many_node_many_edges(g):
+    """Test bf first traversal returns all paths from one node."""
     g.add_node(5)
     g.add_node(6)
     g.add_node(7)
