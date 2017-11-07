@@ -328,3 +328,21 @@ def test_bf_first_many_node_many_edges(g):
     g.add_edge(8, 9)
     g.add_edge(6, 8)
     assert g.depth_first_traversal(8) == [8, 9, 6, 5]
+
+
+def test_breadth_first_works_on_cyclic_graph(g):
+    """Test breadth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_edge(5, 6)
+    g.add_edge(6, 5)
+    assert g.breadth_first_traversal(5) == [5, 6]
+
+
+def test_depth_first_works_on_cyclic_graph(g):
+    """Test breadth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_edge(5, 6)
+    g.add_edge(6, 5)
+    assert g.breadth_first_traversal(5) == [5, 6]

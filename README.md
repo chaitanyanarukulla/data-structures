@@ -203,7 +203,10 @@ Graph() contains the following methods:
 * _del_edge(val1, val2) (On)_ - delete edge between two nodes.
 * _has_node(val) (O1)_ - returns true if node exists and false if not.
 * _neighbors(val) (On2)_ - return a list of nodes with edges to input node.
-* _adjacent(val1, val2) (On)_ - return true if edge exists between two inputs, otherwise false.
+* _adjacent(val1, val2) (On)_ - return true if edge exists between two inputs,
+ otherwise false.
+* _depth_first_traversal(start_val) (Ologn)_ - will return full visited path of traversal completed.
+* _breadth_first_traversal(start_val)(Ologn)_ - will return full visited path of traversal completed.
 
 To access any contained methods:
 new.nodes()
@@ -215,5 +218,7 @@ new.del_edge(val1, val2)
 new.has_node(val)
 new.neighbors(val)
 new.adjacent(val1, val2)
+new.depth_first_traversal(start_val)
+new.breadth_first_traversal(start_val)
 
 ```
