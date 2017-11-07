@@ -49,7 +49,7 @@ class LinkedList(object):
         current = self.head
         self.head = current.get_next()
         self._size -= 1
-        return current
+        return current.data
 
     def size(self):
         """Return the length."""
