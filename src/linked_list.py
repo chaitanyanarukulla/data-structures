@@ -85,15 +85,18 @@ class LinkedList(object):
 
     def display(self):
         """Display the data in str looking tuple."""
-        print_list = '('
-        current = self.head
-        while current:
-            if current.get_next():
-                print_list = print_list + str(current.data) + ', '
-            else:
-                print_list = print_list + str(current.data) + ')'
-            current = current.get_next()
-        return print_list
+        if self._size > 0:
+            print_list = '('
+            current = self.head
+            while current:
+                if current.get_next():
+                    print_list = print_list + str(current.data) + ', '
+                else:
+                    print_list = print_list + str(current.data) + ')'
+                current = current.get_next()
+            return print_list
+        else:
+            return '()'
 
     def __str__(self):
         """Display of data in str looking tuple."""
