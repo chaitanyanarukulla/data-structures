@@ -77,7 +77,7 @@ class Dll(object):
             self.head = current.get_next()
             self.head.set_prve(None)
             self._size -= 1
-        return current
+        return current.data
 
     def shift(self):
         """Remove current tail of list."""
@@ -92,7 +92,7 @@ class Dll(object):
             self.tail = current.get_prve()
             self.tail.set_next(None)
             self._size -= 1
-        return current
+        return current.data
 
     def remove(self, val):
         """Remove inputted value."""
