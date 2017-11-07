@@ -89,3 +89,21 @@ class Graph(object):
             return False
         else:
             raise ValueError('These edges do not exist.')
+
+    def depth_first_traversal(self, start_val):
+        """Traverse the graph from first edge of each node until ultimate."""
+        if start_val in self._graph:
+            depth_traversal = []
+            path = [start_val]
+            while path:
+                val = path.pop()
+                if val not in depth_traversal:
+                    depth_traversal.append(val)
+                    path = path + self._graph[val]
+            return depth_traversal
+        else:
+            raise ValueError('Value is not in graph.')
+
+    def breadth_first_traversal(self, start_val):
+        """Traverse the graph by node's edges before moving to next node."""
+        pass

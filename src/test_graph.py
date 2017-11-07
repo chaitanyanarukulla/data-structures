@@ -211,3 +211,67 @@ def test_adjacent_raises_valueerror_if_input_not_node(g):
     g.add_node(7)
     with pytest.raises(ValueError):
         g.adjacent(9, 0)
+
+
+def test_depth_first_one_node_many_edges(g):
+    """Test depth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_node(7)
+    g.add_node(8)
+    g.add_node(9)
+    g.add_edge(5, 6)
+    g.add_edge(5, 7)
+    g.add_edge(5, 8)
+    g.add_edge(5, 9)
+    assert g.depth_first_traversal(5) == [5, 9, 8, 7, 6]
+
+
+def test_depth_first_node_no_edge_return_only_self(g):
+    """Test depth first traversal returns start val if no edges."""
+    g.add_node(8)
+    g.add_node(9)
+    g.add_node(10)
+    g.add_edge(10, 8)
+    assert g.depth_first_traversal(8) == [8]
+
+
+def test_depth_first_one_edge_per_node(g):
+    """Test depth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_node(7)
+    g.add_node(8)
+    g.add_node(9)
+    g.add_edge(5, 6)
+    g.add_edge(6, 7)
+    g.add_edge(7, 8)
+    g.add_edge(8, 9)
+    assert g.depth_first_traversal(5) == [5, 6, 7, 8, 9]
+
+
+def test_df_raises_value_error_node_not_exist(g):
+    """Test df traversal raises value error if val not in graph."""
+    with pytest.raises(ValueError):
+        g.depth_first_traversal('blerg')
+
+
+def test_depth_first_many_node_many_edges(g):
+    """Test depth first traversal returns all paths from one node."""
+    g.add_node(5)
+    g.add_node(6)
+    g.add_node(7)
+    g.add_node(8)
+    g.add_node(9)
+    g.add_edge(5, 9)
+    g.add_edge(6, 9)
+    g.add_edge(7, 8)
+    g.add_edge(8, 5)
+    g.add_edge(9, 5)
+    g.add_edge(9, 6)
+    g.add_edge(9, 8)
+    g.add_edge(6, 5)
+    g.add_edge(7, 5)
+    g.add_edge(8, 9)
+    g.add_edge(6, 8)
+    assert g.depth_first_traversal(8) == [8, 9, 6, 5]
