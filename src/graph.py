@@ -60,7 +60,6 @@ class Graph(object):
         except KeyError:
             raise ValueError('These edges do not exist.')
 
-
     def has_node(self, val):
         """Return true or false if node has value."""
         if val in self._graph:
@@ -70,12 +69,10 @@ class Graph(object):
 
     def neighbors(self, val):
         """Return list of nodes connected node(val)."""
+        neighbors = []
         try:
-            neighbors = []
-            for key in self._graph:
-                if val in self._graph[key]:
-                    if self._graph[key] not in neighbors:
-                        neighbors.append(self._graph[key])
+            for key in self._graph[val]:
+                neighbors.append(key)
             return neighbors
         except KeyError:
             raise ValueError('This node dosent exit')
