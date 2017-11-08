@@ -102,13 +102,14 @@ class Dll(object):
                 if current == self.head:
                     self.pop()
                     self._size -= 1
+                    return None
                 else:
                     npn = current.get_prve()
                     nnn = current.get_next()
                     npn.set_next(nnn)
                     nnn.set_prve(npn)
                     self._size -= 1
-                return None
+                    return None
             current = current.get_next()
         else:
             raise ValueError('Your node does not exist in this linked list.')
