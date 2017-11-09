@@ -101,7 +101,6 @@ class Dll(object):
             if current.get_data() == val:
                 if current == self.head:
                     self.pop()
-                    self._size -= 1
                     return None
                 else:
                     npn = current.get_prve()
