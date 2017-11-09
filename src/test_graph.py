@@ -361,3 +361,65 @@ def test_depth_first_works_on_cyclic_graph(g):
     g.add_edge(5, 6)
     g.add_edge(6, 5)
     assert g.breadth_first_traversal(5) == [5, 6]
+
+
+def test_add_edges_w_weights_returns_dict_of_edges_as_tuple_keys(g):
+    """Test if edges are added if 2 val are given with default weight."""
+    g.add_node(5)
+    g.add_node(7)
+    g.add_edge(5, 7, 6)
+    assert g.edges() == {(5, 7): 6}
+
+
+def test_add_two_edges_w_weights_(g):
+    """Test if edges are added if 2 val are given with weights returns dict."""
+    g.add_node(5)
+    g.add_node(7)
+    g.add_node(9)
+    g.add_edge(5, 7, 100)
+    g.add_edge(7, 9, 1)
+    assert g.edges() == {(5, 7): 100, (7, 9): 1}
+
+
+def test_add_edges_w_weights_will_add_mutipule_edges_to_a_node(g):
+    """Test if edges are added if 2 val are given with weights."""
+    g.add_node(5)
+    g.add_node(7)
+    g.add_node(9)
+    g.add_node(10)
+    g.add_edge(5, 7, 4)
+    g.add_edge(5, 9)
+    g.add_edge(5, 10, 12039)
+    assert g.edges() == {(5, 7): 4, (5, 9): 0, (5, 10): 12039}
+
+
+def test_add_edges_with_weights_with_one_val_in_graph_add_second_val(g):
+    """Test if edges are added if 2 val are given."""
+    g.add_node(5)
+    g.add_node(7)
+    g.add_node(9)
+    g.add_node(10)
+    g.add_edge(5, 7, 0)
+    g.add_edge(5, 9, 3)
+    g.add_edge(5, 15, 6)
+    assert g.edges() == {(5, 7): 0, (5, 9): 3, (5, 15): 6}
+
+
+def test_add_edges_w_weights_with_first_val_new_and_second_val_in_graph(g):
+    """Test if edges are added if 2 val are given."""
+    g.add_node(5)
+    g.add_node(7)
+    g.add_node(9)
+    g.add_node(10)
+    g.add_edge(5, 7, 4)
+    g.add_edge(5, 9, 7)
+    g.add_edge(15, 5, 9)
+    assert (15, 5) in g.edges()
+    assert (5, 7) in g.edges()
+    assert (5, 9) in g.edges()
+
+
+def test_add_edges_with_weights_with_two_new_nodes(g):
+    """Test add edges when both nodes are new to graph."""
+    g.add_edge(19, 100, 1000)
+    assert g.edges() == {(19, 100): 1000}
