@@ -120,4 +120,19 @@ class Graph(object):
 
 
 if __name__ == '__main__':
-    
+    graph_data = {
+        'A': ['B', 'D'],
+        'B': ['A', 'E', 'D'],
+        'C': ['A', 'B'],
+        'D': [],
+        'E': ['D', 'C', 'B', 'A']
+    }
+    g = Graph()
+    g._graph = graph_data
+    print('Using the following graph:\n\n{}\n\nthe lists below show a '
+          'depth_first_traversal followed by a '
+          'breadth_first_traversal:'.format(graph_data))
+    print('\nDepth First Traversal:')
+    print(g.depth_first_traversal('A'))
+    print('\nBreadth First Traversal:')
+    print(g.breadth_first_traversal('A'))
