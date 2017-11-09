@@ -187,7 +187,7 @@ new.peek()
 
 ```
 
-### Graph Class Usage
+### Graph Class (weighted) Usage
 
 ```
 To create an instance of a Graph() class contained in package, from python:
@@ -196,9 +196,9 @@ new = Graph() *you may not call Graph() with any parameters.*
 
 Graph() contains the following methods:
 * _nodes() (O1)_ - will return a list of all nodes in the graph.
-* _edges() (On2)_ - will return a list of edges in graph.
+* _edges() (On2)_ - will return a dictionary of edges in graph with weights.
 *_add_node(val) (01)_ - adds a new node to the graph.
-*_add_edge(val1, val2) (0n)_ - add a new edge to nodes in the graph.
+*_add_edge(val1, val2, weight) (0n)_ - add a new edge to nodes in the graph.
 * _del_node(val) (On2)_ - delete node from graph.
 * _del_edge(val1, val2) (On)_ - delete edge between two nodes.
 * _has_node(val) (O1)_ - returns true if node exists and false if not.
@@ -212,7 +212,7 @@ To access any contained methods:
 new.nodes()
 new.edges()
 new.add_node(val)
-new.add_edge(val1, val2)
+new.add_edge(val1, val2, weight)
 new.del_node(val)
 new.del_edge(val1, val2)
 new.has_node(val)
