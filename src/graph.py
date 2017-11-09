@@ -115,3 +115,42 @@ class Graph(object):
             return depth_traversal
         else:
             raise ValueError('Value is not in graph.')
+
+
+if __name__ == '__main__':
+    graph_data = {
+        'A': {'B': 0, 'D': 0},
+        'B': {'A': 0, 'E': 0, 'D': 0},
+        'C': {'A': 0, 'B': 0},
+        'D': {},
+        'E': {'D': 0, 'C': 0, 'B': 0, 'A': 0}
+    }
+    g = Graph()
+    g._graph = graph_data
+    print('Using the following graph:\n\n{}\n\nthe lists below show a '
+          'depth_first_traversal followed by a '
+          'breadth_first_traversal:'.format(graph_data))
+    print('\nDepth First Traversal:')
+    print(g.depth_first_traversal('A'))
+    print('\nBreadth First Traversal:')
+    print(g.breadth_first_traversal('A'))
+
+    graph_data = {
+        'George': {'Steve': 0, 'Jane': 0, 'Phil': 0},
+        'Anne': {'Abe': 0, 'Uma': 0, 'George': 0},
+        'George': {'Abe': 0, 'Steve': 0},
+        'Steve': {'Anne': 0},
+        'Abe': {'George': 0, 'Uma': 0, 'Steve': 0, 'Phil': 0},
+        'Uma': {'Steve': 0},
+        'Phil': {'Uma': 0, 'George': 0, 'Phil': 0},
+        'Jane': {'Anne': 0},
+    }
+    g2 = Graph()
+    g2._graph = graph_data
+    print('\n\nHere is another example on the following graph:\n\n{}\n\nthe '
+          'lists below, again, show a depth_first_traversal followed by a '
+          'breadth_first_traversal:'.format(graph_data))
+    print('\nDepth First Traversal:')
+    print(g2.depth_first_traversal('Abe'))
+    print('\nBreadth First Traversal:')
+    print(g2.breadth_first_traversal('Abe'))
