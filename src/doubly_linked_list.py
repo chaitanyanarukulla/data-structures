@@ -102,6 +102,9 @@ class Dll(object):
                 if current == self.head:
                     self.pop()
                     return None
+                if current == self.tail:
+                    self.shift()
+                    return None
                 else:
                     npn = current.get_prve()
                     nnn = current.get_next()
