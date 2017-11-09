@@ -117,3 +117,7 @@ class Graph(object):
             return depth_traversal
         else:
             raise ValueError('Value is not in graph.')
+
+
+if __name__ == '__main__':
+    
