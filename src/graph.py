@@ -136,3 +136,23 @@ if __name__ == '__main__':
     print(g.depth_first_traversal('A'))
     print('\nBreadth First Traversal:')
     print(g.breadth_first_traversal('A'))
+
+    graph_data = {
+        'George': ['Steve', 'Jane', 'Phil'],
+        'Anne': ['Abe', 'Uma', 'George'],
+        'George': ['Abe', 'Steve'],
+        'Steve': ['Anne'],
+        'Abe': ['George', 'Uma', 'Steve', 'Phil'],
+        'Uma': ['Steve'],
+        'Phil': ['Uma', 'George', 'Phil'],
+        'Jane': ['Anne'],
+    }
+    g2 = Graph()
+    g2._graph = graph_data
+    print('\n\nHere is another example on the following graph:\n\n{}\n\nthe '
+          'lists below, again, show a depth_first_traversal followed by a '
+          'breadth_first_traversal:'.format(graph_data))
+    print('\nDepth First Traversal:')
+    print(g2.depth_first_traversal('Abe'))
+    print('\nBreadth First Traversal:')
+    print(g2.breadth_first_traversal('Abe'))
