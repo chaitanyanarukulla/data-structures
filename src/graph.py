@@ -75,7 +75,10 @@ class Graph(object):
                 if val in self._graph[key]:
                     if self._graph[key] not in neighbors:
                         neighbors.append(self._graph[key])
-            return neighbors
+            if len(neighbors) == 0:
+                return None
+            else:
+                return neighbors
         except KeyError:
             raise ValueError('This node dosent exit')
 
