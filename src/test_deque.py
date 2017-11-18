@@ -48,7 +48,7 @@ def test_pop_with_manys_items_returns_first(ed):
     ed.append('one')
     ed.append('two')
     ed.append('buckle_my_shoe')
-    assert ed.pop() == 'one'
+    assert ed.pop() == 'buckle_my_shoe'
 
 
 def test_pop_empty_deque_raises_indexerror(ed):
@@ -80,7 +80,7 @@ def test_shift_with_manys_items_returns_first(ed):
     ed.append('one')
     ed.append('two')
     ed.append('buckle_my_shoe')
-    assert ed.popleft() == 'buckle_my_shoe'
+    assert ed.popleft() == 'one'
 
 
 def test_shift_empty_deque_raises_indexerror(ed):

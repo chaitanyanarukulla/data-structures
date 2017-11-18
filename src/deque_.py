@@ -20,14 +20,14 @@ class Deque(object):
     def pop(self):
         """Remove first val from end of the Deque."""
         try:
-            return self._container.pop().data
+            return self._container.pop()
         except IndexError:
             raise IndexError('There are no nodes to pop.')
 
     def popleft(self):
         """Remove first val from front of the Deque."""
         try:
-            return self._container.shift().data
+            return self._container.shift()
         except IndexError:
             raise IndexError('There are no nodes to popleft.')
 
