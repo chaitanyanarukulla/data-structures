@@ -120,3 +120,34 @@ def test_peek_returns_the_higest_priority_val(pq):
     pq.insert('one', 1)
     pq.insert('four', 4)
     assert pq.peek() == 'hi'
+
+
+def test_peek_empty_pq_returns_none(pq):
+    """Test if peek returns empty list on peek empty pq."""
+    with pytest.raises(IndexError):
+        pq.peek()
+
+
+def test_peek_after_insert_and_pop_returns_highest_priority_item(pq):
+    """Test peek returns highest priority item after insert and pop used."""
+    pq.insert('hi', -10)
+    pq.insert('four', 4)
+    pq.insert('one', -1)
+    pop1 = pq.pop()
+    pop2 = pq.pop()
+    assert pq.peek() == 'four'
+    pq.insert('first', -20)
+    assert pq.peek() == 'first'
+    pop3 = pq.pop()
+    pq.insert('last', 20)
+    assert pq.peek() == 'four'
+
+
+def test_peek_on_priority_with_multiple_values(pq):
+    """Test peek shows first item in on a priority with many values."""
+    pq.insert('hi', 5)
+    pq.insert('howdy', 5)
+    pq.insert('hola', 5)
+    pq.insert('hey', 5)
+    pq.insert('heyo', 5)
+    assert pq.peek() == 'hi'
