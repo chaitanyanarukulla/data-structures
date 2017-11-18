@@ -82,10 +82,9 @@ class Graph(object):
     def adjacent(self, val1, val2):
         """Return true if edge between vals, else false, & error if no val."""
         if val1 in self._graph or val2 in self._graph:
-            if val1 in self._graph[val2]:
-                return True
             if val2 in self._graph[val1]:
                 return True
-            return False
+            else:
+                return False
         else:
             raise ValueError('These edges do not exist.')
