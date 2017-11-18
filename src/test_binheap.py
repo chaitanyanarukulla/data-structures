@@ -76,3 +76,29 @@ def test_pop_returns_sorted_values_limited(ebh):
     ebh.push(29)
     all_popped = [ebh.pop() for i in range(7)]
     assert all_popped == [2, 6, 17, 23, 29, 30, 50]
+
+
+def test_initialize_binheap_with_noniterable_returns_empty_heap():
+    """Test initialize binheap with non-iterable returns empty heap."""
+    from binheap import Binheap
+    b = Binheap(1)
+    assert b.heaplist == []
+
+
+def test_initialize_binheap_with_iterable_returns_heap_of_values():
+    """Test initialize binheap with an iterable returns a heap of items."""
+    from binheap import Binheap
+    b = Binheap([5, 8, 3, 4])
+    assert b.heaplist == [3, 4, 5, 8]
+
+
+def test_pop_heap_with_all_values_of_one(ebh):
+    """Test pop heap when all values are 1."""
+    ebh.push(1)
+    ebh.push(1)
+    ebh.push(1)
+    ebh.push(1)
+    assert ebh.pop() == 1
+    assert ebh.pop() == 1
+    assert ebh.pop() == 1
+    assert ebh.pop() == 1
