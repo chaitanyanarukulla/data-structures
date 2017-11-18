@@ -77,7 +77,7 @@ class Dll(object):
             self.head = current.get_next()
             self.head.set_prve(None)
             self._size -= 1
-        return current
+        return current.data
 
     def shift(self):
         """Remove current tail of list."""
@@ -92,7 +92,7 @@ class Dll(object):
             self.tail = current.get_prve()
             self.tail.set_next(None)
             self._size -= 1
-        return current
+        return current.data
 
     def remove(self, val):
         """Remove inputted value."""
@@ -101,14 +101,17 @@ class Dll(object):
             if current.get_data() == val:
                 if current == self.head:
                     self.pop()
-                    self._size -= 1
+                    return None
+                if current == self.tail:
+                    self.shift()
+                    return None
                 else:
                     npn = current.get_prve()
                     nnn = current.get_next()
                     npn.set_next(nnn)
                     nnn.set_prve(npn)
                     self._size -= 1
-                return current
+                    return None
             current = current.get_next()
         else:
             raise ValueError('Your node does not exist in this linked list.')
