@@ -1,7 +1,6 @@
 """Using Dijkstra's algorithm to solve the shortest path."""
 from graph import Graph
 
-from priorityq import Priorityq
 
 graph = {
     'A': {'C': 4,
@@ -26,31 +25,50 @@ graph = {
     'G': {}
 }
 
+test_graph = {
+    'A': {'B': 5,
+          'C': 6
+          },
+    'B': {'D': 2
+          },
+    'C': {'E': 8,
+          'F': 4
+          },
+    'D': {'E': 2,
+          'G': 10
+          },
+    'E': {'G': 10,
+          'F': 4
+          },
+}
 
 g = Graph()
-g._graph = graph
+g._graph = test_graph
 
 
 def dijkstra(graph, start, end):
     """Dijkysta algorithm to calculate the shortest path."""
-    distance = {}
+    distance = {start: 0}
     parents = {}
-    # q = {}
-    q = Priorityq()
 
-    q.insert(start, 0)
+    not_visited = list(graph._graph.keys())
 
-    while q:
-        
-    for val in q:
-        distance[val] = q[val]
-        if val == end:
-            break
-        for edge in graph._graph[val]:
-            length = distance[val] + graph._graph[val][edge]
-            if edge not in q or length < q[edge]:
-                q[edge] = length
-                parents[edge] = val
+    while not_visited:
+        min_node = None
+        for val in not_visited:
+            if val in distance:
+                if min_node is None:
+                    min_node = val
+                elif distance[val] < distance[min_node]:
+                    min_node = val
+
+        not_visited.remove(min_node)
+
+        for edge in graph._graph[min_node]:
+            length = distance[min_node] + graph._graph[min_node][edge]
+            if edge not in distance or length < distance[edge]:
+                distance[edge] = length
+                parents[edge] = min_node
 
     return parents
 
@@ -58,8 +76,11 @@ def dijkstra(graph, start, end):
 def shortest_distance(graph, start, end):
     """Utilize dijkstra to find the shortest path."""
     d = dijkstra(graph, start, end)
-    path = [start, end]
+    path = [end]
     while end != start:
-        path.insert(1, d[end])
+        path.insert(0, d[end])
         end = d[end]
     return path
+
+
+ans = shortest_distance(g, 'A', 'E')
