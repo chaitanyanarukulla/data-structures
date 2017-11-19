@@ -35,11 +35,13 @@ def dijkstra(graph, start, end):
     """Dijkysta algorithm to calculate the shortest path."""
     distance = {}
     parents = {}
-    q = {}
-    # q = Priorityq()
+    # q = {}
+    q = Priorityq()
 
-    q[start] = 0
+    q.insert(start, 0)
 
+    while q:
+        
     for val in q:
         distance[val] = q[val]
         if val == end:
