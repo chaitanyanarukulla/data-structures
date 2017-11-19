@@ -117,7 +117,7 @@ class Graph(object):
             raise ValueError('Value is not in graph.')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     graph_data = {
         'A': {'B': 0, 'D': 0},
         'B': {'A': 0, 'E': 0, 'D': 0},
