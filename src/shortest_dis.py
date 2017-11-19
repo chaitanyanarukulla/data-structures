@@ -1,4 +1,51 @@
-"""Shorest distance."""
+"""Using Dijkstra's algorithm to solve the shortest path."""
+from graph import Graph
+
+
+graph = {
+    'A': {'C': 4,
+          'B': 2,
+          'D': 5
+          },
+    'C': {'G': 20,
+          'D': 8
+          },
+    'B': {'E': 8
+          },
+    'D': {'C': 4,
+          'B': 3,
+          'F': 10,
+          'G': 15
+          },
+    'E': {'F': 8,
+          'D': 8
+          },
+    'F': {'G': 5
+          },
+    'G': {}
+}
+
+test_graph = {
+    'A': {'B': 5,
+          'C': 6
+          },
+    'B': {'D': 2
+          },
+    'C': {'E': 8,
+          'F': 4
+          },
+    'D': {'E': 2,
+          'G': 10
+          },
+    'E': {'G': 10,
+          'F': 4
+          },
+}
+
+g = Graph()
+tg = Graph()
+tg._graph = test_graph
+g._graph = graph
 
 
 def dijkstra(graph, start, end):
@@ -16,15 +63,15 @@ def dijkstra(graph, start, end):
                     min_node = val
                 elif distance[val] < distance[min_node]:
                     min_node = val
-
         not_visited.remove(min_node)
         if graph._graph[min_node] == {}:
             return parents
-        for edge in graph._graph[min_node]:
-            length = distance[min_node] + graph._graph[min_node][edge]
-            if edge not in distance or length < distance[edge]:
-                distance[edge] = length
-                parents[edge] = min_node
+        else:
+            for edge in graph._graph[min_node]:
+                length = distance[min_node] + graph._graph[min_node][edge]
+                if edge not in distance or length < distance[edge]:
+                    distance[edge] = length
+                    parents[edge] = min_node
 
     return parents
 
