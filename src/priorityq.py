@@ -12,6 +12,9 @@ class Priorityq(object):
 
     def insert(self, val, priority=0):
         """Insert a new value into the queue."""
+        if len(self._que) == 0:
+            self._highest = priority
+            self._lowest = priority
         if priority <= self._highest:
             self._highest = priority
         if priority >= self._lowest:
@@ -39,4 +42,7 @@ class Priorityq(object):
 
     def peek(self):
         """View the hightest priority item."""
-        return self._que[self._highest][0]
+        if len(self._que) == 0:
+            raise IndexError('There are no items to view.')
+        else:
+            return self._que[self._highest][0]
