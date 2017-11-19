@@ -222,3 +222,15 @@ new.depth_first_traversal(start_val)
 new.breadth_first_traversal(start_val)
 
 ```
+
+### Shortest Distance Problem
+
+```
+The problem of the traveling salesperson finding the shortest distance between points can be solved in a variety of ways. We have used Dijkstra's Algorith as our first method to a solution. 
+
+_Dijkstra's Algorithm_ (On) - finds the shortest path exploring all edges of a graph from it's starting point. By comparing the distance or weight of the edges from the start to each child as it traverses the graph it is able to calculate the shortest route by saving the parent path which will have the lowest cost from start to finish.
+
+To use this function:
+dijkstra(graph, start, end)
+
+```

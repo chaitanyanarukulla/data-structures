@@ -1,7 +1,8 @@
 """Test for Shorest distance graph."""
+from graph import Graph
+
 import pytest
 
-from graph import Graph
 from shortest_dis import dijkstra, shortest_distance
 
 
