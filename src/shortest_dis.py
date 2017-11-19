@@ -43,6 +43,8 @@ test_graph = {
 }
 
 g = Graph()
+tg = Graph()
+tg._graph = test_graph
 g._graph = graph
 
 
