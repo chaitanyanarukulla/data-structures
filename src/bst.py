@@ -5,8 +5,8 @@ class Node(object):
     """Node object for bst."""
     def __init__(self, data, lc=None, rc=None)
         self.data = data
-        self.left_child = lc
-        self.right_child = rc
+        self.left = lc
+        self.right = rc
 
 
 class BST(object):
@@ -29,34 +29,34 @@ class BST(object):
         if val == self.root:
             raise ValueError('This node already exists.')
         if val < self.root:
-            current = self.root.left_child
+            current = self.root.left
             while current != None:
                 if val == current:
                     raise ValueError('This node already exists.')
                 if val < current:
-                    current = current.left_child
+                    current = current.left
                 if val > current:
-                    current = current.right_child
+                    current = current.right
             if val < current:
-                current.left_child = Node(val)
+                current.left = Node(val)
                 self._size += 1
             if val > current:
-                current.right_child = Node(val)
+                current.right = Node(val)
                 self._size += 1
         if val > self.root:
-            current = self.root.right_child
+            current = self.root.right
             while current != None:
                 if val == current:
                     raise ValueError('This node already exists.')
                 if val < current:
-                    current = current.left_child
+                    current = current.left
                 if val > current:
-                    current = current.right_child
+                    current = current.right
             if val < current:
-                current.left_child = Node(val)
+                current.left = Node(val)
                 self._size += 1
             if val > current:
-                current.right_child = Node(val)
+                current.right = Node(val)
                 self._size += 1
 
     def search(self, val):
@@ -64,23 +64,23 @@ class BST(object):
         if val == self.root:
             return self.root
         if val < self.root:
-            current = self.root.left_child
+            current = self.root.left
             while current != None:
                 if val == current:
                     return current
                 if val < current:
-                    current = current.left_child
+                    current = current.left
                 if val > current:
-                    current = current.right_child
+                    current = current.right
         if val > self.root:
-            current = self.root.right_child
+            current = self.root.right
             while current != None:
                 if val == current:
                     return current
                 if val < current:
-                    current = current.left_child
+                    current = current.left
                 if val > current:
-                    current = current.right_child
+                    current = current.right
         else:
             return None
 
@@ -88,14 +88,29 @@ class BST(object):
         """Returns size of bst."""
         return self._size
 
-    def depth(self):
+    def depth(self, root=self.root):
         """Returns total number of levels in bst."""
-        right = 0
-        left = 0
-        depth = 0
-        current = self.root
-        while current != None:
-            if current.left_child:
-                current = current.left_child
-                left += 1
-                
+        if root is None:
+            return 0
+        if not root.left and not root.right:
+            return 1
+        elif root.left and not root.right:
+            return depth(root.left) + 1
+        elif root.right and not root.left:
+            return depth(root.right) + 1
+        else:
+            return max(depth(root.left), depth(root.right)) + 1
+
+    def contains(self, val):
+        """Search for val in tree and return boolean."""
+        return self.search(val)
+
+    def balance(self):
+        """Returns integer indicating balance of tree."""
+        if self.root is None:
+            return 'There are no nodes in this tree.'
+        return depth(self.root.right) - depth(self.root.left) 
+
+
+
+
