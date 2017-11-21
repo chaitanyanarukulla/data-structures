@@ -24,108 +24,45 @@ class Bst(object):
 
     def insert(self, val):
         """Insert a value into bst."""
-        if not isinstance(val, int):
+        if not isinstance(val, (int, float)):
             raise ValueError('Sorry, I only take numbers right now.')
         if self.root is None:
             self.root = Node(val)
             self._size += 1
+            return
         elif val == self.root.data:
             raise ValueError('This node already exists.')
-        elif val < self.root.data:
-            if self.root.left:
-                current = self.root.left
-                while current:
-                    if val == current.data:
-                        raise ValueError('This node already exists.')
-                    elif val < current.data:
-                        if current.left:
-                            current = current.left
-                        else:
-                            current.left = Node(val)
-                            self._size += 1
-                            break
-                    elif val > current.data:
-                        if current.right:
-                            current = current.right
-                        else:
-                            current.right = Node(val)
-                            self._size += 1
-                            break
-            else:
-                if val < self.root.data:
-                    self.root.left = Node(val)
+        current = self.root
+        while current:
+            if val == current.data:
+                    raise ValueError('This node already exists.')
+            elif val < current.data:
+                if current.left:
+                    current = current.left
+                else:
+                    current.left = Node(val)
                     self._size += 1
-                if val > self.root.data:
-                    self.root.right = Node(val)
+                    break
+            elif val > current.data:
+                if current.right:
+                    current = current.right
+                else:
+                    current.right = Node(val)
                     self._size += 1
-        elif val > self.root.data:
-            if self.root.right:
-                current = self.root.right
-                while current:
-                    if val == current.data:
-                        raise ValueError('This node already exists.')
-                    elif val < current.data:
-                        if current.left:
-                            current = current.left
-                        else:
-                            current.left = Node(val)
-                            self._size += 1
-                            break
-                    elif val > current.data:
-                        if current.right:
-                            current = current.right
-                        else:
-                            current.right = Node(val)
-                            self._size += 1
-                            break
-            else:
-                if val < self.root.data:
-                    self.root.left = Node(val)
-                    self._size += 1
-                if val > self.root.data:
-                    self.root.right = Node(val)
-                    self._size += 1
+                    break
 
     def search(self, val):
         """Search bst for val and return node of this val, else none."""
-        if self.root is None or not isinstance(val, int):
-            return None
-        if val == self.root.data:
-            return self.root
-        if val < self.root.data:
-            if self.root.left:
-                current = self.root.left
-                while current:
-                    if val == current.data:
-                        return current
-                    elif val < current.data:
-                        try:
-                            current = current.left
-                        except AttributeError:
-                            break
-                    elif val > current.data:
-                        try:
-                            current = current.right
-                        except AttributeError:
-                            break
-        if val > self.root.data:
-            if self.root.right:
-                current = self.root.right
-                while current:
-                    if val == current.data:
-                        return current
-                    elif val < current.data:
-                        try:
-                            current = current.left
-                        except AttributeError:
-                            break
-                    elif val > current.data:
-                        try:
-                            current = current.right
-                        except AttributeError:
-                            break
-        else:
-            return None
+        if self.root is None or not isinstance(val, (int, float)):
+            return
+        current = self.root
+        while current:
+            if val == current.data:
+                return current
+            elif val < current.data:
+                current = current.left
+            elif val > current.data:
+                current = current.right
 
     def size(self):
         """Return size of bst."""
