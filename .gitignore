@@ -101,7 +101,4 @@ ENV/
 .mypy_cache/
 
 #pycharm
-.idea/workspace.xml
-.idea/data-structures.iml
-.idea/dictionaries/Chai.xml
-.idea/misc.xml
+.idea/
