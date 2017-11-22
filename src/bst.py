@@ -105,20 +105,29 @@ class Bst(object):
 if __name__ == '__main__':  # pragma: no cover
     import timeit
     bst_ub = Bst([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
-    insert_time_ub = timeit.timeit(bst_ub.insert(17))
-    search_time_ub = timeit.timeit(bst_ub.search(16))
-    search_time_root_ub = timeit.timeit(bst_ub.search(1))
-    bst_b = Bst([10, 14, 7, 12, 8, 16, 6, 11, 4, 15, 5, 18, 2, 17, 3, 19, 2])
-    insert_time_b = timeit.timeit(bst_b.insert(20))
-    search_time_b = timeit.timeit(bst_b.search(2))
-    search_time_root_b = timeit.timeit(bst_b.search(10))
-    print('The following times relate to the unbalanced binary search'
-          'tree:\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].')
-    print('Insert 17: {}'.format(insert_time_ub))
-    print('Search 16: {}'.format(search_time_ub))
-    print('Search 1: {}'.format(search_time_root_ub))
-    print('The following times relate to the unbalanced binary search tree'
-          ':\n[10, 14, 7, 12, 8, 16, 6, 11, 4, 15, 5, 18, 2, 17, 3, 19, 2].')
-    print('Insert 20: {}'.format(insert_time_b))
-    print('Search 19: {}'.format(search_time_b))
-    print('Search 10: {}'.format(search_time_root_b))
+    bst_b = Bst([10, 14, 7, 12, 8, 16, 6, 11, 4, 15, 5, 18, 2, 17, 3, 19])
+
+    # insert_time_ub = wrapper(bst_ub.insert, 17)
+    # search_time_ub = wrapper(bst_ub.search, 16)
+    # search_time_root_ub = wrapper(bst_ub.search, 1)
+    # insert_time_b = wrapper(bst_b.insert, 20)
+    # search_time_b = wrapper(bst_b.search, 2)
+    # search_time_root_b = wrapper(bst_b.search, 10)
+    num = (x for x in range(17, 1000))
+    a = timeit.timeit('bst_ub.insert(next(num))',
+                      setup='from __main__ import bst_ub, num',
+                      number=983)
+    # b = timeit.timeit(search_time_ub, number=1000)
+    # c = timeit.timeit(search_time_root_ub, number=1000)
+    # d = timeit.timeit(insert_time_b, number=1000)
+    # e = timeit.timeit(search_time_b, number=1000)
+    # f = timeit.timeit(search_time_root_b, number=1000)
+    print('The following times relate worst case insert.')
+    print('Insert: {}'.format(a))
+    # print('Search 16: {}'.format(b))
+    # print('Search 1: {}'.format(c))
+    # print('The following times relate to the unbalanced binary search tree'
+    #       ':\n[10, 14, 7, 12, 8, 16, 6, 11, 4, 15, 5, 18, 2, 17, 3, 19, 2].')
+    # print('Insert 20: {}'.format(d))
+    # print('Search 19: {}'.format(e))
+    # print('Search 10: {}'.format(f))
