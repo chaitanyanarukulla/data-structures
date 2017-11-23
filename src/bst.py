@@ -134,43 +134,39 @@ class Bst(object):
 
     def pre_order(self):
         """Return generator of pre order search."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
         current = self.root
+        ios = []
+        while current or ios:
+            if current:
+                yield current.data
+                if current.right:
+                    ios.append(current.right)
+                current = current.left
+            else:
+                current = ios.pop()
+
+    def post_order(self):
+        """Return generator of post order wearch."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+        current = self.root
+        previous = None
         ios = []
         while current or ios:
             if current:
                 ios.append(current)
                 current = current.left
             else:
+                if :
+                    current = current.right.left
+                current = current.right
+            else:
                 current = ios.pop()
                 yield current.data
-                current = current.right
-
-    def post_order(self):
-        """Return generator of post order wearch."""
-        pass
 
 
-
-# notes
-class Solution:
-    """
-    @param root: The root of binary tree.
-    @return: Preorder in ArrayList which contains node values.
-    """
-    def preorderTraversal(self, root):
-        ret = []
- 
-        stack = []
-        while stack or root:
-            if root:
-                ret.append(root.val)
-                if root.right:
-                    stack.append(root.right)
-                root = root.left
-            else:
-                root = stack.pop()
-        return ret
- 
     def postorderTraversal(self, root):
         ret = []
         stack = []
@@ -186,19 +182,6 @@ class Solution:
                 else:
                     last = stack.pop()
                     ret.append(last.val)
-        return ret
- 
-    def inorderTraversal(self, root):
-        ret = []
-        stack = []
-        while stack or root:
-            if root:
-                stack.append(root)
-                root = root.left
-            else:
-                root = stack.pop()
-                ret.append(root.val)
-                root = root.right
         return ret
 
 

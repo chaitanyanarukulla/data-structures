@@ -207,3 +207,33 @@ def test_in_order_returns_tree_in_ascending_order(bst_big):
     for i in range(10):
         output.append(next(g))
     assert output == [1, 10, 18, 40, 50, 68, 80, 110, 500, 5000]
+
+
+def test_pre_order_retuns_object(bst):
+    """Test pre order returns object."""
+    g = bst.pre_order()
+    assert isinstance(g, object)
+
+
+def test_pre_order_returns_valid_generator(bst_big):
+    """Test pre order returns valid generator object."""
+    g = bst_big.pre_order()
+    assert next(g) == 50
+
+
+def test_pre_order_returns_left_side_of_all_nodes_first(bst_big):
+    """Test pre order returns left side of each node first."""
+    g = bst_big.pre_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [50, 40, 10, 1, 18, 68, 110, 80, 500, 5000]
+
+
+def test_pre_order_returns_proper_order_unabalances(bst_full):
+    """Test pre order returns proper order from unbalanced tree."""
+    g = bst_full.pre_order()
+    output = []
+    for i in range(3):
+        output.append(next(g))
+    assert output == [3254, 908543, 58490543]
