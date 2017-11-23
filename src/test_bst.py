@@ -158,3 +158,31 @@ def test_balance_returns_int_of_r_minus_l_of_tree_three(bst):
     bst.insert(3)
     bst.insert(4)
     assert bst.balance() == 2
+
+
+def test_breadth_first_returns_object(bst_big):
+    """Test breadth first returns generator object."""
+    b = bst_big.breadth_first()
+    assert isinstance(b, object)
+
+
+def test_breadth_first_is_valid_generator(bst_big):
+    """Test breadth first returns valid generator."""
+    g = bst_big.breadth_first()
+    assert next(g) == 50
+
+
+def test_breadth_first_return_children_l_to_r(bst_big):
+    """Test breadth first returns all children l to r."""
+    g = bst_big.breadth_first()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [50, 40, 68, 10, 110, 1, 18, 80, 500, 5000]
+
+
+def test_breadth_first_on_empty_bst_raises_value_error(bst):
+    """Test breadth first search raises value error if bst empty."""
+    g = bst.breadth_first()
+    with pytest.raises(ValueError):
+        next(g)

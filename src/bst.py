@@ -68,10 +68,13 @@ class Bst(object):
         """Return size of bst."""
         return self._size
 
-    def depth(self, root):
+    def depth(self, root=None):
         """Return total number of levels in bst."""
         if root is None:
-            return 0
+            if self.root is None:
+                return 0
+            else:
+                root = self.root
         if not root.left and not root.right:
             return 0
         elif root.left and not root.right:
@@ -100,6 +103,95 @@ class Bst(object):
             return self.depth(self.root.right)
         else:
             return self.depth(self.root.right) - self.depth(self.root.left)
+
+    def breadth_first(self):
+        """Return generator of breadth first search."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+        bfs = [self.root]
+        while bfs:
+            current = bfs.pop(0)
+            if current.left:
+                bfs.append(current.left)
+            if current.right:
+                bfs.append(current.right)
+            yield current.data
+
+    def in_order(self):
+        """Return generator of in order search."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+
+        current = self.root
+        ios = []
+        while current or ios:
+            if current:
+                ios.append(current)
+                current = current.left
+            else:
+                current = ios.pop()
+                yield current.data
+                current = current.right
+
+    def pre_order(self):
+        """Return generator of pre order search."""
+        pass
+
+    def post_order(self):
+        """Return generator of post order wearch."""
+        pass
+
+
+# notes
+class Solution:
+    """
+    @param root: The root of binary tree.
+    @return: Preorder in ArrayList which contains node values.
+    """
+    def preorderTraversal(self, root):
+        ret = []
+ 
+        stack = []
+        while stack or root:
+            if root:
+                ret.append(root.val)
+                if root.right:
+                    stack.append(root.right)
+                root = root.left
+            else:
+                root = stack.pop()
+        return ret
+ 
+    def postorderTraversal(self, root):
+        ret = []
+        stack = []
+         
+        last = None
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                if stack[-1].right and stack[-1].right is not last:
+                    root = stack[-1].right
+                else:
+                    last = stack.pop()
+                    ret.append(last.val)
+        return ret
+ 
+    def inorderTraversal(self, root):
+        ret = []
+        stack = []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                root = stack.pop()
+                ret.append(root.val)
+                root = root.right
+        return ret
+
 
 
 if __name__ == '__main__':  # pragma: no cover
