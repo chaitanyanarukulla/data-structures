@@ -121,7 +121,6 @@ class Bst(object):
         """Return generator of in order search."""
         if self.root is None:
             raise ValueError('There are no nodes in this tree.')
-
         current = self.root
         ios = []
         while current or ios:
@@ -135,11 +134,21 @@ class Bst(object):
 
     def pre_order(self):
         """Return generator of pre order search."""
-        pass
+        current = self.root
+        ios = []
+        while current or ios:
+            if current:
+                ios.append(current)
+                current = current.left
+            else:
+                current = ios.pop()
+                yield current.data
+                current = current.right
 
     def post_order(self):
         """Return generator of post order wearch."""
         pass
+
 
 
 # notes

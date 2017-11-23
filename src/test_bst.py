@@ -186,3 +186,24 @@ def test_breadth_first_on_empty_bst_raises_value_error(bst):
     g = bst.breadth_first()
     with pytest.raises(ValueError):
         next(g)
+
+
+def test_in_order_returns_object(bst):
+    """Test in order returns object."""
+    g = bst.in_order()
+    assert isinstance(g, object)
+
+
+def test_in_order_is_valid_generator(bst_big):
+    """Test in order returns valid generator."""
+    g = bst_big.in_order()
+    assert next(g) == 1
+
+
+def test_in_order_returns_tree_in_ascending_order(bst_big):
+    """Test in order returns ordered vals."""
+    g = bst_big.in_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [1, 10, 18, 40, 50, 68, 80, 110, 500, 5000]
