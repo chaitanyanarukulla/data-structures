@@ -249,6 +249,10 @@ Bst() contains the following methods:
 * _depth(root) (0(n))_ - returns the depth of the tree.
 * _contains(val) (Olog(n))_ - will return true or false if value is in tree.
 *_ balance() (0(n))_ - returns the depth of the left minus the right side of the tree as an integer.
+* _in_order() (O(n))_ - returns a generator the entire tree in order of lowest to highest value.
+* _pre_order() (0(n)(log(n)))_ - returns a generator of parent followed by children from left side to right side.
+* _post_order() (O(n)log(n)))_ - returns a generator of children followed by parent from left side to right side.
+*_ breadth_first() (0(n))_ - returns generator of tree ordered from root one level at a time.
 
 To access any contained methods:
 new.insert(val)
@@ -257,5 +261,8 @@ new.size()
 new.depth(root)
 new.contains(val)
 new.balance()
-
+new.in_order()
+new.pre_order()
+new.post_order()
+new.breadth_first()
 ```

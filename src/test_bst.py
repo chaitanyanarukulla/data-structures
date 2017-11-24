@@ -209,6 +209,13 @@ def test_in_order_returns_tree_in_ascending_order(bst_big):
     assert output == [1, 10, 18, 40, 50, 68, 80, 110, 500, 5000]
 
 
+def test_in_order_on_empty_bst_raises_value_error(bst):
+    """Test in order search raises value error if bst empty."""
+    g = bst.in_order()
+    with pytest.raises(ValueError):
+        next(g)
+
+
 def test_pre_order_retuns_object(bst):
     """Test pre order returns object."""
     g = bst.pre_order()
@@ -237,3 +244,56 @@ def test_pre_order_returns_proper_order_unabalances(bst_full):
     for i in range(3):
         output.append(next(g))
     assert output == [3254, 908543, 58490543]
+
+
+def test_pre_order_on_empty_bst_raises_value_error(bst):
+    """Test pre order search raises value error if bst empty."""
+    g = bst.pre_order()
+    with pytest.raises(ValueError):
+        next(g)
+
+
+def test_post_order_returns_object(bst):
+    """Test post order returns object."""
+    g = bst.post_order()
+    assert isinstance(g, object)
+
+
+def test_post_order_returns_valid_generator(bst_big):
+    """Test post order returns valid generator object."""
+    g = bst_big.post_order()
+    assert next(g) == 1
+
+
+def test_post_order_returns_root_last(bst_big):
+    """Test post order returns left side then right with root in middle."""
+    g = bst_big.post_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output[-1] == 50
+
+
+def test_post_order_returns_proper_order_unbalanced(bst_full):
+    """Test post order returns proper order on unbalanced tree."""
+    g = bst_full.post_order()
+    output = []
+    for i in range(3):
+        output.append(next(g))
+    assert output == [58490543, 908543, 3254]
+
+
+def test_post_order_returns_proper_order_on_balanced(bst_big):
+    """Test post order returns proper order on balanced tree."""
+    g = bst_big.post_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [1, 18, 10, 40, 80, 5000, 500, 110, 68, 50]
+
+
+def test_post_order_on_empty_bst_raises_value_error(bst):
+    """Test post order search raises value error if bst empty."""
+    g = bst.post_order()
+    with pytest.raises(ValueError):
+        next(g)

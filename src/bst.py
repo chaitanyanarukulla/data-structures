@@ -152,38 +152,18 @@ class Bst(object):
         if self.root is None:
             raise ValueError('There are no nodes in this tree.')
         current = self.root
-        previous = None
+        child = None
         ios = []
         while current or ios:
             if current:
                 ios.append(current)
                 current = current.left
             else:
-                if :
-                    current = current.right.left
-                current = current.right
-            else:
-                current = ios.pop()
-                yield current.data
-
-
-    def postorderTraversal(self, root):
-        ret = []
-        stack = []
-         
-        last = None
-        while stack or root:
-            if root:
-                stack.append(root)
-                root = root.left
-            else:
-                if stack[-1].right and stack[-1].right is not last:
-                    root = stack[-1].right
+                if ios[-1].right and ios[-1].right is not child:
+                    current = ios[-1].right
                 else:
-                    last = stack.pop()
-                    ret.append(last.val)
-        return ret
-
+                    child = ios.pop()
+                    yield child.data
 
 
 if __name__ == '__main__':  # pragma: no cover
