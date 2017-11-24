@@ -1,5 +1,7 @@
 # Data-Structures
 
+[![Build Status](https://travis-ci.org/markreynoso/data-structures.svg?branch=bst_traversals)](https://travis-ci.org/markreynoso/data-structures)
+
 Where a variety of data-structures found in python are being explored, such as:
 * A simple class LinkedList for building linked lists as well as a subclass Stack to implement a stack.
 
