@@ -1,0 +1,2 @@
+"""binary seatch tree."""
+
