@@ -101,6 +101,67 @@ class Bst(object):
         else:
             return self.depth(self.root.right) - self.depth(self.root.left)
 
+    def breadth_first(self):
+        """Return generator of breadth first search."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+        bfs = [self.root]
+        while bfs:
+            current = bfs.pop(0)
+            if current.left:
+                bfs.append(current.left)
+            if current.right:
+                bfs.append(current.right)
+            yield current.data
+
+    def in_order(self):
+        """Return generator of in order search."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+        current = self.root
+        ios = []
+        while current or ios:
+            if current:
+                ios.append(current)
+                current = current.left
+            else:
+                current = ios.pop()
+                yield current.data
+                current = current.right
+
+    def pre_order(self):
+        """Return generator of pre order search."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+        current = self.root
+        ios = []
+        while current or ios:
+            if current:
+                yield current.data
+                if current.right:
+                    ios.append(current.right)
+                current = current.left
+            else:
+                current = ios.pop()
+
+    def post_order(self):
+        """Return generator of post order wearch."""
+        if self.root is None:
+            raise ValueError('There are no nodes in this tree.')
+        current = self.root
+        child = None
+        ios = []
+        while current or ios:
+            if current:
+                ios.append(current)
+                current = current.left
+            else:
+                if ios[-1].right and ios[-1].right is not child:
+                    current = ios[-1].right
+                else:
+                    child = ios.pop()
+                    yield child.data
+
 
 if __name__ == '__main__':  # pragma: no cover
     import timeit
