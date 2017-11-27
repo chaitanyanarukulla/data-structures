@@ -168,3 +168,133 @@ def test_balance_returns_int_of_r_minus_l_of_tree_three(bst):
     bst.insert(3)
     bst.insert(4)
     assert bst.balance() == 2
+
+
+def test_breadth_first_returns_object(bst_test):
+    """Test breadth first returns generator object."""
+    b = bst_test.breadth_first()
+    assert isinstance(b, object)
+
+
+def test_breadth_first_is_valid_generator(bst_test):
+    """Test breadth first returns valid generator."""
+    g = bst_test.breadth_first()
+    assert next(g) == 50
+
+
+def test_breadth_first_on_empty_bst_raises_value_error(bst):
+    """Test breadth first search raises value error if bst empty."""
+    g = bst.breadth_first()
+    with pytest.raises(ValueError):
+        next(g)
+
+
+def test_in_order_returns_object(bst):
+    """Test in order returns object."""
+    g = bst.in_order()
+    assert isinstance(g, object)
+
+
+def test_in_order_is_valid_generator(bst_test):
+    """Test in order returns valid generator."""
+    g = bst_test.in_order()
+    assert next(g) == 10
+
+
+def test_in_order_returns_tree_in_ascending_order(bst_test):
+    """Test in order returns ordered vals."""
+    g = bst_test.in_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [10, 11, 20, 40, 50, 60, 80, 100, 500, 9999]
+
+
+def test_in_order_on_empty_bst_raises_value_error(bst):
+    """Test in order search raises value error if bst empty."""
+    g = bst.in_order()
+    with pytest.raises(ValueError):
+        next(g)
+
+
+def test_pre_order_retuns_object(bst):
+    """Test pre order returns object."""
+    g = bst.pre_order()
+    assert isinstance(g, object)
+
+
+def test_pre_order_returns_valid_generator(bst_test):
+    """Test pre order returns valid generator object."""
+    g = bst_test.pre_order()
+    assert next(g) == 50
+
+
+def test_pre_order_returns_left_side_of_all_nodes_first(bst_test):
+    """Test pre order returns left side of each node first."""
+    g = bst_test.pre_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [50, 40, 20, 11, 10, 60, 100, 80, 500, 9999]
+
+
+def test_pre_order_returns_proper_order_unabalances(bst_is_full):
+    """Test pre order returns proper order from unbalanced tree."""
+    g = bst_is_full.pre_order()
+    output = []
+    for i in range(3):
+        output.append(next(g))
+    assert output == [20, 100, 100000]
+
+
+def test_pre_order_on_empty_bst_raises_value_error(bst):
+    """Test pre order search raises value error if bst empty."""
+    g = bst.pre_order()
+    with pytest.raises(ValueError):
+        next(g)
+
+
+def test_post_order_returns_object(bst):
+    """Test post order returns object."""
+    g = bst.post_order()
+    assert isinstance(g, object)
+
+
+def test_post_order_returns_valid_generator(bst_test):
+    """Test post order returns valid generator object."""
+    g = bst_test.post_order()
+    assert next(g) == 10
+
+
+def test_post_order_returns_root_last(bst_test):
+    """Test post order returns left side then right with root in middle."""
+    g = bst_test.post_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output[-1] == 50
+
+
+def test_post_order_returns_proper_order_unbalanced(bst_is_full):
+    """Test post order returns proper order on unbalanced tree."""
+    g = bst_is_full.post_order()
+    output = []
+    for i in range(3):
+        output.append(next(g))
+    assert output == [100000, 100, 20]
+
+
+def test_post_order_returns_proper_order_on_balanced(bst_test):
+    """Test post order returns proper order on balanced tree."""
+    g = bst_test.post_order()
+    output = []
+    for i in range(10):
+        output.append(next(g))
+    assert output == [10, 11, 20, 40, 80, 9999, 500, 100, 60, 50]
+
+
+def test_post_order_on_empty_bst_raises_value_error(bst):
+    """Test post order search raises value error if bst empty."""
+    g = bst.post_order()
+    with pytest.raises(ValueError):
+        next(g)

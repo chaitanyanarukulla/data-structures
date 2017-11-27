@@ -105,13 +105,13 @@ class Bst(object):
         """Return generator of breadth first search."""
         if self.root is None:
             raise ValueError('There are no nodes in this tree.')
-        bfs = [self.root]
-        while bfs:
-            current = bfs.pop(0)
+        breadth_first_search = [self.root]
+        while breadth_first_search:
+            current = breadth_first_search.pop(0)
             if current.left:
-                bfs.append(current.left)
+                breadth_first_search.append(current.left)
             if current.right:
-                bfs.append(current.right)
+                breadth_first_search.append(current.right)
             yield current.data
 
     def in_order(self):
@@ -119,13 +119,13 @@ class Bst(object):
         if self.root is None:
             raise ValueError('There are no nodes in this tree.')
         current = self.root
-        ios = []
-        while current or ios:
+        in_order_search = []
+        while current or in_order_search:
             if current:
-                ios.append(current)
+                in_order_search.append(current)
                 current = current.left
             else:
-                current = ios.pop()
+                current = in_order_search.pop()
                 yield current.data
                 current = current.right
 
@@ -134,15 +134,15 @@ class Bst(object):
         if self.root is None:
             raise ValueError('There are no nodes in this tree.')
         current = self.root
-        ios = []
-        while current or ios:
+        in_order_search = []
+        while current or in_order_search:
             if current:
                 yield current.data
                 if current.right:
-                    ios.append(current.right)
+                    in_order_search.append(current.right)
                 current = current.left
             else:
-                current = ios.pop()
+                current = in_order_search.pop()
 
     def post_order(self):
         """Return generator of post order wearch."""
@@ -150,16 +150,16 @@ class Bst(object):
             raise ValueError('There are no nodes in this tree.')
         current = self.root
         child = None
-        ios = []
-        while current or ios:
+        in_order_search = []
+        while current or in_order_search:
             if current:
-                ios.append(current)
+                in_order_search.append(current)
                 current = current.left
             else:
-                if ios[-1].right and ios[-1].right is not child:
-                    current = ios[-1].right
+                if in_order_search[-1].right and in_order_search[-1].right is not child:
+                    current = in_order_search[-1].right
                 else:
-                    child = ios.pop()
+                    child = in_order_search.pop()
                     yield child.data
 
 
