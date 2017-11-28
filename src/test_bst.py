@@ -297,3 +297,137 @@ def test_post_order_on_empty_bst_raises_value_error(bst):
     g = bst.post_order()
     with pytest.raises(ValueError):
         next(g)
+
+
+def test_delete_empty_tree_returns_none(bst):
+    """Test delete on empty tree returns none."""
+    assert bst.delete(5) is None
+
+
+def test_delete_on_tree_with_only_root(bst):
+    """Test delete on tree with only root node."""
+    bst.insert(5)
+    bst.delete(5)
+    assert bst.size() == 0
+    assert bst.search(5) is None
+
+
+def test_delete_on_root_in_large_bst(bst_big):
+    """Test delete on root node in large bst."""
+    bst_big.delete(50)
+    output = []
+    b_output = []
+    o = bst_big.in_order()
+    b = bst_big.breadth_first()
+    for i in range(9):
+        output.append(next(o))
+        b_output.append(next(b))
+    assert bst_big.search(50) is None
+    assert 50 not in output
+    assert b_output == [68, 40, 110, 10, 80, 500, 1, 18, 5000]
+
+
+def test_delete_on_node_with_no_chirdren(bst_big):
+    """Test delete on node with no children."""
+    bst_big.delete(5000)
+    output = []
+    b_output = []
+    o = bst_big.in_order()
+    b = bst_big.breadth_first()
+    for i in range(9):
+        output.append(next(o))
+        b_output.append(next(b))
+    assert bst_big.search(5000) is None
+    assert 5000 not in output
+    assert b_output == [50, 40, 68, 10, 110, 1, 18, 80, 500]
+
+
+def test_delete_on_node_with_one_child_right(bst_big):
+    """Test delete on node with only one right child."""
+    bst_big.delete(500)
+    output = []
+    b_output = []
+    o = bst_big.in_order()
+    b = bst_big.breadth_first()
+    for i in range(9):
+        output.append(next(o))
+        b_output.append(next(b))
+    assert bst_big.search(500) is None
+    assert 500 not in output
+    assert b_output == [50, 40, 68, 10, 110, 1, 18, 80, 5000]
+
+
+def test_delete_on_node_with_two_children(bst_big):
+    """Test delete on node with one left child."""
+    bst_big.delete(10)
+    output = []
+    b_output = []
+    o = bst_big.in_order()
+    b = bst_big.breadth_first()
+    for i in range(9):
+        output.append(next(o))
+        b_output.append(next(b))
+    assert bst_big.search(10) is None
+    assert 10 not in output
+    assert b_output == [50, 40, 68, 18, 110, 1, 80, 500, 5000]
+
+
+def test_delete_on_root_unbalanced_left(bst):
+    """Test delete when only left nodes."""
+    bst.insert(100)
+    bst.insert(80)
+    bst.insert(60)
+    bst.insert(40)
+    bst.delete(100)
+    assert bst.search(100) is None
+    assert bst.size() == 3
+
+
+def test_delete_on_root_on_unbalanced_right(bst):
+    """Test unbalanced when only right nodes."""
+    bst.insert(40)
+    bst.insert(60)
+    bst.insert(80)
+    bst.insert(100)
+    bst.delete(40)
+    assert bst.search(40) is None
+    assert bst.size() == 3
+
+
+def test_delete_back_to_back(bst_big):
+    """Test delete multiple times."""
+    bst_big.delete(110)
+    bst_big.delete(18)
+    bst_big.delete(50)
+    output = []
+    o = bst_big.in_order()
+    for i in range(7):
+        output.append(next(o))
+    assert 110 not in output
+    assert 18 not in output
+    assert 50 not in output
+    assert output == [1, 10, 40, 68, 80, 500, 5000]
+    assert bst_big.search(110) is None
+    assert bst_big.search(18) is None
+    assert bst_big.search(50) is None
+
+
+def test_delete_one_child_parent_greater(bst_big):
+    """Test delete node with one child when parent is greater."""
+    bst_big.delete(40)
+    assert bst_big.search(40) is None
+
+
+def test_delete_two_children_if_next_has_one_child(bst_big):
+    """Test delete node with one child when parent is greater."""
+    bst_big.insert(85)
+    bst_big.insert(55)
+    bst_big.delete(68)
+    assert bst_big.search(68) is None
+
+
+def test_delete_two_children_if_next_no_child(bst_big):
+    """Test delete node with one child when parent is greater."""
+    bst_big.insert(55)
+    bst_big.delete(68)
+    assert bst_big.search(68) is None

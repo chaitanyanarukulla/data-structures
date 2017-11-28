@@ -4,11 +4,12 @@
 class Node(object):
     """Node object for bst."""
 
-    def __init__(self, data, lc=None, rc=None):
+    def __init__(self, data, lc=None, rc=None, mom=None):
         """Initialize a new node."""
         self.data = data
         self.left = lc
         self.right = rc
+        self.parent = mom
 
 
 class Bst(object):
@@ -41,6 +42,7 @@ class Bst(object):
                     current = current.left
                 else:
                     current.left = Node(val)
+                    current.left.parent = current
                     self._size += 1
                     break
             elif val > current.data:
@@ -48,6 +50,7 @@ class Bst(object):
                     current = current.right
                 else:
                     current.right = Node(val)
+                    current.right.parent = current
                     self._size += 1
                     break
 
@@ -164,6 +167,118 @@ class Bst(object):
                 else:
                     child = ios.pop()
                     yield child.data
+
+    def delete(self, val):
+        """Delete node with given val."""
+        if self.root is None or not isinstance(val, (int, float)):
+            return
+        on_deck = self.search(val)
+        if not on_deck.left and not on_deck.right:
+            self._delete_no_children(on_deck)
+        elif on_deck.left and not on_deck.right:
+            self._delete_one_child(on_deck)
+        elif on_deck.right and not on_deck.left:
+            self._delete_one_child(on_deck)
+        elif on_deck.left and on_deck.right:
+            self._delete_two_children(on_deck)
+
+    def _delete_no_children(self, on_deck):
+        """Delete node with no children."""
+        self._size -= 1
+        if not on_deck.parent:
+            self.root = None
+        elif on_deck.parent.data < on_deck.data:
+            on_deck.parent.right = None
+            on_deck.parent = None
+        elif on_deck.parent.data > on_deck.data:
+            on_deck.parent.left = None
+            on_deck.parent = None
+
+    def _delete_one_child(self, on_deck):
+        """Delete node with only one child."""
+        self._size -= 1
+        if on_deck == self.root:
+            if self.root.right:
+                self.root = self.root.right
+            else:
+                self.root = self.root.left
+            self.root.parent is None
+        elif on_deck.parent.data < on_deck.data:
+            if on_deck.left:
+                on_deck.parent.right = on_deck.left
+                on_deck.parent = None
+                on_deck.left = None
+            elif on_deck.right:
+                on_deck.parent.right = on_deck.right
+                on_deck.parent = None
+                on_deck.right = None
+        else:
+            if on_deck.left:
+                on_deck.parent.left = on_deck.left
+                on_deck.parent = None
+                on_deck.left = None
+            elif on_deck.right:
+                on_deck.parent.left = on_deck.right
+                on_deck.parent = None
+                on_deck.right = None
+
+    def _delete_two_children(self, on_deck):
+        """Delete node with two children."""
+        self._size -= 1
+        current = on_deck.right
+        while current:
+            if current.left:
+                current = current.left
+            else:
+                break
+        if current.parent == on_deck:
+            current.parent = on_deck.parent
+            current.left = on_deck.left
+            on_deck.parent = None
+            on_deck.right = None
+            on_deck.left = None
+            if current.parent:
+                if current.parent.data < current.data:
+                    current.parent.right = current
+                else:
+                    current.parent.left = current
+            else:
+                self.root = current
+        elif current.right:
+            current.right.parent = current.parent
+            current.parent.left = current.right
+            current.parent = on_deck.parent
+            current.right = on_deck.right
+            current.left = on_deck.left
+            current.left.parent = current
+            current.right.parent = current
+            on_deck.parent = None
+            on_deck.right = None
+            on_deck.left = None
+            if current.parent:
+                if current.parent.data < current.data:
+                    current.parent.right = current
+                else:
+                    current.parent.left = current
+            else:
+                self.root = current
+        else:
+            current.parent.left = None
+            current.parent = on_deck.parent
+            current.right = on_deck.right
+            current.left = on_deck.left
+            current.left.parent = current
+            current.right.parent = current
+            on_deck.parent = None
+            on_deck.right = None
+            on_deck.left = None
+            if current.parent:
+                if current.parent.data < current.data:
+                    current.parent.right = current
+                else:
+                    current.parent.left = current
+            else:
+                self.root = current
 
 
 if __name__ == '__main__':  # pragma: no cover
