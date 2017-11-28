@@ -255,6 +255,8 @@ Bst() contains the following methods:
 * _pre_order() (0(n)(log(n)))_ - returns a generator of parent followed by children from left side to right side.
 * _post_order() (O(n)log(n)))_ - returns a generator of children followed by parent from left side to right side.
 *_ breadth_first() (0(n))_ - returns generator of tree ordered from root one level at a time.
+*_ delete(val) (0log(n))_ - delete a node with given val.
+
 
 To access any contained methods:
 new.insert(val)
@@ -267,4 +269,5 @@ new.in_order()
 new.pre_order()
 new.post_order()
 new.breadth_first()
+new.delete(val)
 ```
