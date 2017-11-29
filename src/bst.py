@@ -71,14 +71,11 @@ class Bst(object):
         """Return size of bst."""
         return self._size
 
-    def depth(self, root=None):
+    def depth(self, root):
         """Return total number of levels in bst."""
         if root is None:
-            if self.root is None:
-                return 0
-            else:
-                root = self.root
-        if root == self.root and not root.left and not root.right:
+            return 0
+        elif root == self.root and not root.left and not root.right:
             return 0
         elif not root.left and not root.right:
             return 1
@@ -96,21 +93,14 @@ class Bst(object):
         else:
             return False
 
-    def balance(self, node=None):
+    def balance(self, node):
         """Return integer indicating balance of tree."""
         if node is None:
-            if self.root is None:
-                return 'There are no nodes in this tree.'
-            else:
-                node = self.root
+            return 'There are no nodes in this tree.'
         if not node.left and not node.right:
             return 0
-        elif node.left and not node.right:
-            return self.depth(node.left)
-        elif node.right and not node.left:
-            return self.depth(node.right)
         else:
-            return self.depth(node.right) - self.depth(node.left)
+            return self.depth(node.left) - self.depth(node.right)
 
     def breadth_first(self):
         """Return generator of breadth first search."""
@@ -266,6 +256,17 @@ class Bst(object):
                     current.parent.left = current
             else:
                 self.root = current
+
+    # def _check_balance(self, node):
+    #     """Check parent nodes for balance on insert or delete."""
+    #     check = node.parent
+    #     while check:
+    #         if self.balance(check) > 1:
+    #             if balance(check.left) < 0:
+    #         elif self.balance(check) < -1:
+    #             pass
+    #         else:
+    #             check = check.parent
 
     def _right_rotation(self, node):
         """Rotate node to the right."""

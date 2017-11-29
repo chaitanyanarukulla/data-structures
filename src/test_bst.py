@@ -129,17 +129,17 @@ def test_contains_returns_true_if_val_in_tree(bst_big):
 
 def test_balance_returns_string_if_bst_is_empty(bst):
     """Test balance returns none if bst is empty."""
-    assert bst.balance() == 'There are no nodes in this tree.'
+    assert bst.balance(bst.root) == 'There are no nodes in this tree.'
 
 
 def test_balance_returns_int(bst_big):
     """Test balancde returns int.."""
-    assert isinstance(bst_big.balance(), int)
+    assert isinstance(bst_big.balance(bst_big.root), int)
 
 
 def test_balance_returns_int_of_r_minus_l_of_tree(bst_big):
     """Test balance returns int of left minus right sides of tree."""
-    assert bst_big.balance() == 1
+    assert bst_big.balance(bst_big.root) == -1
 
 
 def test_balance_returns_int_of_r_minus_l_of_tree_two(bst_full, bst):
@@ -147,8 +147,8 @@ def test_balance_returns_int_of_r_minus_l_of_tree_two(bst_full, bst):
     bst.insert(2)
     bst.insert(1)
     bst.insert(3)
-    assert bst.balance() == 0
-    assert bst_full.balance() == 2
+    assert bst.balance(bst.root) == 0
+    assert bst_full.balance(bst_full.root) == -2
 
 
 def test_balance_returns_int_of_r_minus_l_of_tree_three(bst):
@@ -160,7 +160,7 @@ def test_balance_returns_int_of_r_minus_l_of_tree_three(bst):
     bst.insert(5)
     bst.insert(6)
     bst.insert(7)
-    assert bst.balance() == 6
+    assert bst.balance(bst.root) == -6
 
 
 def test_breadth_first_returns_object(bst_big):
