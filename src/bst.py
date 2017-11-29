@@ -193,20 +193,27 @@ class Bst(object):
         if on_deck == self.root:
             if self.root.right:
                 self.root = self.root.right
+                self.root.right = on_deck.right
+                self.root.left = on_deck.left
             else:
                 self.root = self.root.left
+                self.root.right = on_deck.right
+                self.root.left = on_deck.left
             self.root.parent is None
         elif on_deck.parent.data < on_deck.data:
             if on_deck.left:
                 on_deck.parent.right = on_deck.left
+                on_deck.left.parent = on_deck.parent
             elif on_deck.right:
                 on_deck.parent.right = on_deck.right
+                on_deck.right.parent = on_deck.parent
         else:
             if on_deck.left:
                 on_deck.parent.left = on_deck.left
-
+                on_deck.left.parent = on_deck.parent
             elif on_deck.right:
                 on_deck.parent.left = on_deck.right
+                on_deck.right.parent = on_deck.parent
 
     def _delete_two_children(self, on_deck):
         """Delete node with two children."""
