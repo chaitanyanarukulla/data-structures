@@ -78,8 +78,10 @@ class Bst(object):
                 return 0
             else:
                 root = self.root
-        if not root.left and not root.right:
+        if root == self.root and not root.left and not root.right:
             return 0
+        elif not root.left and not root.right:
+            return 1
         elif root.left and not root.right:
             return self.depth(root.left) + 1
         elif root.right and not root.left:
@@ -94,18 +96,21 @@ class Bst(object):
         else:
             return False
 
-    def balance(self):
+    def balance(self, node=None):
         """Return integer indicating balance of tree."""
-        if self.root is None:
-            return 'There are no nodes in this tree.'
-        elif not self.root.left and not self.root.right:
+        if node is None:
+            if self.root is None:
+                return 'There are no nodes in this tree.'
+            else:
+                node = self.root
+        if not node.left and not node.right:
             return 0
-        elif self.root.left and not self.root.right:
-            return self.depth(self.root.left)
-        elif self.root.right and not self.root.left:
-            return self.depth(self.root.right)
+        elif node.left and not node.right:
+            return self.depth(node.left)
+        elif node.right and not node.left:
+            return self.depth(node.right)
         else:
-            return self.depth(self.root.right) - self.depth(self.root.left)
+            return self.depth(node.right) - self.depth(node.left)
 
     def breadth_first(self):
         """Return generator of breadth first search."""
@@ -189,10 +194,8 @@ class Bst(object):
             self.root = None
         elif on_deck.parent.data < on_deck.data:
             on_deck.parent.right = None
-            on_deck.parent = None
         elif on_deck.parent.data > on_deck.data:
             on_deck.parent.left = None
-            on_deck.parent = None
 
     def _delete_one_child(self, on_deck):
         """Delete node with only one child."""
@@ -206,21 +209,14 @@ class Bst(object):
         elif on_deck.parent.data < on_deck.data:
             if on_deck.left:
                 on_deck.parent.right = on_deck.left
-                on_deck.parent = None
-                on_deck.left = None
             elif on_deck.right:
                 on_deck.parent.right = on_deck.right
-                on_deck.parent = None
-                on_deck.right = None
         else:
             if on_deck.left:
                 on_deck.parent.left = on_deck.left
-                on_deck.parent = None
-                on_deck.left = None
+
             elif on_deck.right:
                 on_deck.parent.left = on_deck.right
-                on_deck.parent = None
-                on_deck.right = None
 
     def _delete_two_children(self, on_deck):
         """Delete node with two children."""
@@ -234,9 +230,6 @@ class Bst(object):
         if current.parent == on_deck:
             current.parent = on_deck.parent
             current.left = on_deck.left
-            on_deck.parent = None
-            on_deck.right = None
-            on_deck.left = None
             if current.parent:
                 if current.parent.data < current.data:
                     current.parent.right = current
@@ -252,9 +245,6 @@ class Bst(object):
             current.left = on_deck.left
             current.left.parent = current
             current.right.parent = current
-            on_deck.parent = None
-            on_deck.right = None
-            on_deck.left = None
             if current.parent:
                 if current.parent.data < current.data:
                     current.parent.right = current
@@ -269,9 +259,6 @@ class Bst(object):
             current.left = on_deck.left
             current.left.parent = current
             current.right.parent = current
-            on_deck.parent = None
-            on_deck.right = None
-            on_deck.left = None
             if current.parent:
                 if current.parent.data < current.data:
                     current.parent.right = current
@@ -279,6 +266,30 @@ class Bst(object):
                     current.parent.left = current
             else:
                 self.root = current
+
+    def _right_rotation(self, node):
+        """Rotate node to the right."""
+        old_parent = node.parent
+        node = node
+        old_right = node.right
+
+        node.parent = old_parent.parent
+        old_parent.parent = node
+        node.right.parent = old_parent
+        node.right = old_parent
+        node.right.left = old_right
+
+    def _left_rotations(self, node):
+        """Rotate node to the left."""
+        old_parent = node.parent
+        node = node
+        old_left = node.left
+
+        node.parent = old_parent.parent
+        old_parent.parent = node
+        node.left.parent = old_parent
+        node.left = old_parent
+        node.left.right = old_left
 
 
 if __name__ == '__main__':  # pragma: no cover

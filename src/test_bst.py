@@ -91,7 +91,7 @@ def test_search_val_in_tree_retruns_node_with_data(bst_full):
 
 def test_depth_returns_int_of_total_depth_of_tree(bst_full):
     """Test depth returns integer of depth of tree."""
-    assert bst_full.depth(bst_full.root) == 2
+    assert bst_full.depth(bst_full.root) == 3
 
 
 def test_depth_empty_tree_returns_none(bst):
@@ -101,7 +101,7 @@ def test_depth_empty_tree_returns_none(bst):
 
 def test_depth_on_large_tree_returns_full_size(bst_big):
     """Test depth on large tree returns actual size."""
-    assert bst_big.depth(bst_big.root) == 4
+    assert bst_big.depth(bst_big.root) == 5
 
 
 def test_depth_of_tree_with_only_root_is_0(bst):
@@ -148,7 +148,7 @@ def test_balance_returns_int_of_r_minus_l_of_tree_two(bst_full, bst):
     bst.insert(1)
     bst.insert(3)
     assert bst.balance() == 0
-    assert bst_full.balance() == 1
+    assert bst_full.balance() == 2
 
 
 def test_balance_returns_int_of_r_minus_l_of_tree_three(bst):
@@ -157,7 +157,10 @@ def test_balance_returns_int_of_r_minus_l_of_tree_three(bst):
     bst.insert(2)
     bst.insert(3)
     bst.insert(4)
-    assert bst.balance() == 2
+    bst.insert(5)
+    bst.insert(6)
+    bst.insert(7)
+    assert bst.balance() == 6
 
 
 def test_breadth_first_returns_object(bst_big):
