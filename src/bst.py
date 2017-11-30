@@ -264,16 +264,54 @@ class Bst(object):
             else:
                 self.root = current
 
-    # def _check_balance(self, node):
-    #     """Check parent nodes for balance on insert or delete."""
-    #     check = node.parent
-    #     while check:
-    #         if self.balance(check) > 1:
-    #             if balance(check.left) < 0:
-    #         elif self.balance(check) < -1:
-    #             pass
-    #         else:
-    #             check = check.parent
+    def _check_balance(self, node):
+        """Check parent nodes for balance on insert or delete."""
+        check = node.parent
+        while check:
+            if self.balance(check) > 1:
+                if self.balance(check.left) >= 0:
+                    self._right_rotation(check)
+                else:
+                    self._left_rotation(check.left)
+                    self._right_rotation(check)
+            elif self.balance(check) < -1:
+                if self.balance(check.right) <= 0:
+                    self._left_rotation(check)
+                else:
+                    self._right_rotation(check.right)
+                    self._left_rotation(check)
+            else:
+                check = check.parent
+
+    def _right_rotation(self, node):
+        """Rotate node to the right."""
+        swing = node.left
+        node.parent = swing
+        node.left.parent = node.parent
+        node.parent.right = node.left.parent
+        
+
+
+        new_pivot = node.
+
+        old_parent.left = node.left
+        old_parent.left.parent = old_parent
+        node.left = old_parent.left.right
+        node.left.parent = node
+        old_parent.left.right = node
+
+    def _left_rotation(self, node):
+        """Rotate node to the left."""
+        old_parent = node.parent
+        old_left = node.right.left
+
+        old_parent.right = node.right
+        old_parent.right.parent = old_parent
+        node.right = old_parent.right.left
+        node.right.parent = node
+        old_parent.right.left = node
+
+
 
     def _right_rotation(self, node):
         """Rotate node to the right."""
@@ -298,6 +336,8 @@ class Bst(object):
         node.left.parent = old_parent
         node.left = old_parent
         node.left.right = old_left
+
+
 
 
 if __name__ == '__main__':  # pragma: no cover
