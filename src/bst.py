@@ -43,6 +43,7 @@ class Bst(object):
                 else:
                     current.left = Node(val)
                     current.left.parent = current
+                    self._check_balance(current)
                     self._size += 1
                     break
             elif val > current.data:
@@ -51,6 +52,7 @@ class Bst(object):
                 else:
                     current.right = Node(val)
                     current.right.parent = current
+                    self._check_balance(current)
                     self._size += 1
                     break
 
@@ -186,6 +188,7 @@ class Bst(object):
             on_deck.parent.right = None
         elif on_deck.parent.data > on_deck.data:
             on_deck.parent.left = None
+        self._check_balance(on_deck.parent)
 
     def _delete_one_child(self, on_deck):
         """Delete node with only one child."""
@@ -214,6 +217,7 @@ class Bst(object):
             elif on_deck.right:
                 on_deck.parent.left = on_deck.right
                 on_deck.right.parent = on_deck.parent
+        self._check_balance(on_deck.parent)
 
     def _delete_two_children(self, on_deck):
         """Delete node with two children."""
@@ -263,6 +267,7 @@ class Bst(object):
                     current.parent.left = current
             else:
                 self.root = current
+        self._check_balance(on_deck.parent)
 
     def _check_balance(self, node):
         """Check parent nodes for balance on insert or delete."""
@@ -286,58 +291,24 @@ class Bst(object):
     def _right_rotation(self, node):
         """Rotate node to the right."""
         swing = node.left
+
+        swing.parent = node.parent
         node.parent = swing
-        node.left.parent = node.parent
-        node.parent.right = node.left.parent
-        
-
-
-        new_pivot = node.
-
-        old_parent.left = node.left
-        old_parent.left.parent = old_parent
-        node.left = old_parent.left.right
-        node.left.parent = node
-        old_parent.left.right = node
+        swing.right = node
+        node.left = None
+        if swing.parent is None:
+            self.root = swing
 
     def _left_rotation(self, node):
         """Rotate node to the left."""
-        old_parent = node.parent
-        old_left = node.right.left
+        swing = node.right
 
-        old_parent.right = node.right
-        old_parent.right.parent = old_parent
-        node.right = old_parent.right.left
-        node.right.parent = node
-        old_parent.right.left = node
-
-
-
-    def _right_rotation(self, node):
-        """Rotate node to the right."""
-        old_parent = node.parent
-        node = node
-        old_right = node.right
-
-        node.parent = old_parent.parent
-        old_parent.parent = node
-        node.right.parent = old_parent
-        node.right = old_parent
-        node.right.left = old_right
-
-    def _left_rotations(self, node):
-        """Rotate node to the left."""
-        old_parent = node.parent
-        node = node
-        old_left = node.left
-
-        node.parent = old_parent.parent
-        old_parent.parent = node
-        node.left.parent = old_parent
-        node.left = old_parent
-        node.left.right = old_left
-
-
+        swing.parent = node.parent
+        node.parent = swing
+        swing.left = node
+        node.right = None
+        if swing.parent is None:
+            self.root = swing
 
 
 if __name__ == '__main__':  # pragma: no cover
