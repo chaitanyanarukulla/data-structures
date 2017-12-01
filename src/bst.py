@@ -43,8 +43,8 @@ class Bst(object):
                 else:
                     current.left = Node(val)
                     current.left.parent = current
-                    self._check_balance(current)
                     self._size += 1
+                    self._check_balance(current.left)
                     break
             elif val > current.data:
                 if current.right:
@@ -52,8 +52,8 @@ class Bst(object):
                 else:
                     current.right = Node(val)
                     current.right.parent = current
-                    self._check_balance(current)
                     self._size += 1
+                    self._check_balance(current.right)
                     break
 
     def search(self, val):
@@ -182,13 +182,15 @@ class Bst(object):
     def _delete_no_children(self, on_deck):
         """Delete node with no children."""
         self._size -= 1
+        parent = on_deck.parent
         if not on_deck.parent:
             self.root = None
         elif on_deck.parent.data < on_deck.data:
             on_deck.parent.right = None
+            self._check_balance(parent)
         elif on_deck.parent.data > on_deck.data:
             on_deck.parent.left = None
-        self._check_balance(on_deck.parent)
+            self._check_balance(parent)
 
     def _delete_one_child(self, on_deck):
         """Delete node with only one child."""
@@ -203,6 +205,7 @@ class Bst(object):
                 self.root.right = on_deck.right
                 self.root.left = on_deck.left
             self.root.parent is None
+            self._check_balance(self.root)
         elif on_deck.parent.data < on_deck.data:
             if on_deck.left:
                 on_deck.parent.right = on_deck.left
@@ -210,6 +213,7 @@ class Bst(object):
             elif on_deck.right:
                 on_deck.parent.right = on_deck.right
                 on_deck.right.parent = on_deck.parent
+            self._check_balance(on_deck.parent)
         else:
             if on_deck.left:
                 on_deck.parent.left = on_deck.left
@@ -217,7 +221,7 @@ class Bst(object):
             elif on_deck.right:
                 on_deck.parent.left = on_deck.right
                 on_deck.right.parent = on_deck.parent
-        self._check_balance(on_deck.parent)
+            self._check_balance(on_deck.parent)
 
     def _delete_two_children(self, on_deck):
         """Delete node with two children."""
@@ -231,6 +235,8 @@ class Bst(object):
         if current.parent == on_deck:
             current.parent = on_deck.parent
             current.left = on_deck.left
+            if current.left:
+                current.left.parent = current
             if current.parent:
                 if current.parent.data < current.data:
                     current.parent.right = current
@@ -267,12 +273,12 @@ class Bst(object):
                     current.parent.left = current
             else:
                 self.root = current
-        self._check_balance(on_deck.parent)
+        self._check_balance(current)
 
     def _check_balance(self, node):
         """Check parent nodes for balance on insert or delete."""
-        check = node.parent
-        while check:
+        check = node
+        while check is not None:
             if self.balance(check) > 1:
                 if self.balance(check.left) >= 0:
                     self._right_rotation(check)
@@ -293,9 +299,18 @@ class Bst(object):
         swing = node.left
 
         swing.parent = node.parent
-        node.parent = swing
+        node.left = swing.right
+        if swing.right:
+            swing.right.parent = node
         swing.right = node
-        node.left = None
+        if node.right:
+            node.left.parent = node
+        if node.parent:
+            if node.parent.data > swing.data:
+                node.parent.left = swing
+            else:
+                node.parent.right = swing
+        node.parent = swing
         if swing.parent is None:
             self.root = swing
 
@@ -304,9 +319,18 @@ class Bst(object):
         swing = node.right
 
         swing.parent = node.parent
-        node.parent = swing
+        node.right = swing.left
+        if swing.left:
+            swing.left.parent = node
         swing.left = node
-        node.right = None
+        if node.right:
+            node.right.parent = node
+        if node.parent:
+            if node.parent.data > swing.data:
+                node.parent.left = swing
+            else:
+                node.parent.right = swing
+        node.parent = swing
         if swing.parent is None:
             self.root = swing
 
