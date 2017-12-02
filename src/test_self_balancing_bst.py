@@ -1,54 +1,54 @@
 # """Test self-balancing binary search tree."""
 
 
-# def test_bst_imbalance_neg_two_now_balanced(bst_full):
-#     """Test imbalanced bst becomes balanced."""
-#     output = []
-#     g = bst_full.breadth_first()
-#     for i in range(3):
-#         output.append(next(g))
-#     assert output == [908543, 3254, 58490543]
+def test_bst_imbalance_neg_two_now_balanced(bst_full):
+    """Test imbalanced bst becomes balanced."""
+    output = []
+    g = bst_full.breadth_first()
+    for i in range(3):
+        output.append(next(g))
+    assert output == [908543, 3254, 58490543]
 
 
-# def test_bst_imbalance_pos_two_now_balanced(bst):
-#     """Test left imbalanced bst becomes balanced."""
-#     bst.insert(10)
-#     bst.insert(8)
-#     bst.insert(6)
-#     assert bst.root.data == 8
-#     assert bst.root.right.data == 10
-#     assert bst.root.left.data == 6
+def test_bst_imbalance_pos_two_now_balanced(bst):
+    """Test left imbalanced bst becomes balanced."""
+    bst.insert(10)
+    bst.insert(8)
+    bst.insert(6)
+    assert bst.root.data == 8
+    assert bst.root.right.data == 10
+    assert bst.root.left.data == 6
 
 
-# def test_bst_insert_6_larger_nodes_stays_balanced(bst):
-#     """Test insert 6 increasingly larger nodes stays balanced."""
-#     bst.insert(10)
-#     bst.insert(15)
-#     bst.insert(20)
-#     bst.insert(25)
-#     bst.insert(30)
-#     bst.insert(35)
-#     output = []
-#     g = bst.breadth_first()
-#     for i in range(6):
-#         output.append(next(g))
-#     assert output == [25, 15, 30, 10, 20, 35]
+def test_bst_insert_6_larger_nodes_stays_balanced(bst):
+    """Test insert 6 increasingly larger nodes stays balanced."""
+    bst.insert(10)
+    bst.insert(15)
+    bst.insert(20)
+    bst.insert(25)
+    bst.insert(30)
+    bst.insert(35)
+    output = []
+    g = bst.breadth_first()
+    for i in range(6):
+        output.append(next(g))
+    assert output == [25, 15, 30, 10, 20, 35]
 
 
-# def test_bst_insert_7_larger_nodes_stays_balanced(bst):
-#     """Test insert 6 increasingly larger nodes stays balanced."""
-#     bst.insert(10)
-#     bst.insert(15)
-#     bst.insert(20)
-#     bst.insert(25)
-#     bst.insert(30)
-#     bst.insert(35)
-#     bst.insert(40)
-#     output = []
-#     g = bst.breadth_first()
-#     for i in range(7):
-#         output.append(next(g))
-#     assert output == [25, 15, 35, 10, 20, 30, 40]
+def test_bst_insert_7_larger_nodes_stays_balanced(bst):
+    """Test insert 6 increasingly larger nodes stays balanced."""
+    bst.insert(10)
+    bst.insert(15)
+    bst.insert(20)
+    bst.insert(25)
+    bst.insert(30)
+    bst.insert(35)
+    bst.insert(40)
+    output = []
+    g = bst.breadth_first()
+    for i in range(7):
+        output.append(next(g))
+    assert output == [25, 15, 35, 10, 20, 30, 40]
 
 
 def test_bst_insert_varied_size_stays_balanced(bst):
@@ -191,3 +191,30 @@ def test_tree_after_delete_five_nodes(bst):
         print(i)
         output.append(i)
     assert output == [35, 25, 40, 30]
+
+
+def test_tree_stays_balanced_after_fifteen_inserts():
+    """Test tree balanced after 15 inserts."""
+    from bst import Bst
+    bst = Bst([40, 30, 50, 42, 10, 1, 100, 67, 6, 31, 4, 90, 99, 57, 44])
+    output = []
+    for i in bst.breadth_first():
+        print(i)
+        output.append(i)
+    assert output == [40, 10, 90, 4, 30, 50, 100, 1, 6, 31, 42, 67, 99, 44, 57]
+
+
+def test_tree_stays_balanced_after_three_deletes_two_inserts():
+    """Test tree stays balanced after three deletes and two inserts."""
+    from bst import Bst
+    bst = Bst([40, 30, 50, 42, 10, 1, 100, 67, 6, 31, 4, 90, 99, 57, 44])
+    bst.delete(99)
+    bst.delete(40)
+    bst.delete(10)
+    bst.insert(7)
+    bst.insert(68)
+    output = []
+    for i in bst.breadth_first():
+        print(i)
+        output.append(i)
+    assert output == [42, 6, 67, 4, 30, 50, 90, 1, 7, 31, 44, 57, 68, 100]

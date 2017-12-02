@@ -237,9 +237,11 @@ dijkstra(graph, start, end)
 
 ```
 
-### Binary Search Tree
+### Self-Balancing Binary Search Tree
 
 ```
+Tree will maintain a balance of no more that 1 or -1 and will automatically rebalance on any insert or delete into the tree using the methods described below. 
+
 To create an instance if the binary search tree, Bst(), from python:
 
 new = Bst() *you may not call Bst() no parameters or with an iterable item containing unique integers.*
@@ -256,7 +258,6 @@ Bst() contains the following methods:
 * _post_order() (O(n)log(n)))_ - returns a generator of children followed by parent from left side to right side.
 *_ breadth_first() (0(n))_ - returns generator of tree ordered from root one level at a time.
 *_ delete(val) (0log(n))_ - delete a node with given val.
-
 
 To access any contained methods:
 new.insert(val)
