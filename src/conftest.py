@@ -57,3 +57,10 @@ def bst_big():
     new.insert(80)
     new.insert(5000)
     return new
+
+
+@pytest.fixture
+def trie():
+    """Create a new Trie."""
+    from trie import Trie
+    return Trie()
