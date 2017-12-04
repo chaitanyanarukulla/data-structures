@@ -298,3 +298,84 @@ def test_post_order_on_empty_bst_raises_value_error(bst):
     g = bst.post_order()
     with pytest.raises(ValueError):
         next(g)
+
+
+def test_delete_empty_tree_returns_none(bst):
+    """Test delete on empty tree returns none."""
+    assert bst.delete(5) is None
+
+
+def test_delete_on_tree_with_only_root(bst):
+    """Test delete on tree with only root node."""
+    bst.insert(5)
+    bst.delete(5)
+    assert bst.search(5) is None
+
+
+def test_delete_on_root_in_large_bst(bst_test):
+    """Test delete on root node in large bst."""
+    bst_test.delete(50)
+    output = []
+    in_order = bst_test.in_order()
+    for i in range(9):
+        output.append(next(in_order))
+    assert bst_test.search(50) is None
+    assert 50 not in output
+
+
+def test_delete_on_root_unbalanced_left(bst):
+    """Test delete when only left nodes."""
+    bst.insert(100)
+    bst.insert(80)
+    bst.insert(60)
+    bst.insert(40)
+    bst.delete(100)
+    assert bst.search(100) is None
+    assert bst.size() == 4
+
+
+def test_delete_two_children_if_next_no_child(bst_test):
+    """Test delete node with one child when parent is greater."""
+    bst_test.insert(55)
+    bst_test.delete(68)
+    assert bst_test.search(68) is None
+
+
+def test_delete_two_children_if_next_has_one_child(bst_test):
+    """Test delete node with one child when parent is greater."""
+    bst_test.insert(666)
+    bst_test.insert(999999)
+    bst_test.delete(30)
+    assert bst_test.search(30) is None
+
+
+def test_delete_one_child_parent(bst_test):
+    """Test delete node with one child parent."""
+    bst_test.delete(40)
+    assert bst_test.search(40) is None
+
+
+def test_delete_muliiple_times(bst_test):
+    """Test delete multiple times."""
+    bst_test.delete(50)
+    bst_test.delete(40)
+    bst_test.delete(60)
+    bst_test.in_order()
+    result = []
+    assert 50 not in result
+    assert 40 not in result
+    assert 60 not in result
+    assert bst_test.search(50) is None
+    assert bst_test.search(40) is None
+    assert bst_test.search(60) is None
+
+
+def test_delete_last_node_with_no_chirdren(bst_test):
+    """Test delete last node with no children."""
+    bst_test.delete(9999)
+    result = []
+    order = bst_test.in_order()
+    for i in range(9):
+        result.append(next(order))
+    assert bst_test.search(9999) is None
+    assert 9999 not in result

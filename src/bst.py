@@ -4,11 +4,11 @@
 class Node(object):
     """Node object for Binary search tree."""
 
-    def __init__(self, data, left_child=None, right_child=None):
+    def __init__(self, data):
         """Initialize a new node."""
         self.data = data
-        self.left = left_child
-        self.right = right_child
+        self.left = None
+        self.right = None
 
 
 class Bst(object):
@@ -161,6 +161,55 @@ class Bst(object):
                 else:
                     child = in_order_search.pop()
                     yield child.data
+
+    def delete(self, val):
+        """Delete."""
+        node, parent = self.root, None
+
+        while node is not None and val != node.data:
+            parent = node
+            if val > node.data:
+                node = node.right
+            else:
+                node = node.left
+
+        if node is None:
+            return None
+        # declare replacement
+        replacement = None
+        # if node has two children
+        if node.left is not None and node.right is not None:
+            replacement = self._remove_successor(node)
+            replacement.left = node.left
+            replacement.right = node.right
+        # if node has one or no child
+        elif node.left is None:
+            replacement = node.right
+        else:
+            replacement = node.left
+
+        # replace node
+        if node == self.root:
+            self.root = replacement
+        elif parent.left == node:
+            parent.left = replacement
+        else:
+            parent.right = replacement
+
+        return node
+
+    def _remove_successor(self, val):
+        """If val has child."""
+        succ, parent = val.right, val
+        while succ.left is not None:
+            parent = succ
+            succ = succ.left
+        if succ == parent.right:
+            parent.right = succ.right
+        else:
+            parent.left = succ.right
+
+        return succ
 
 
 if __name__ == '__main__':  # pragma: no cover
