@@ -8,7 +8,7 @@ class Node(object):
         """Initialize a new node instance for trie."""
         self.letter = letter
         self.children = {}
-        # self.parent = None
+        self.parent = None
         self.end = False
 
 
@@ -35,6 +35,7 @@ class Trie(object):
                     trace = trace.children[letter]
                 else:
                     trace.children[letter] = Node(letter)
+                    trace.children[letter].parent = trace
                     trace = trace.children[letter]
             trace.end = True
             self._size += 1
@@ -43,11 +44,13 @@ class Trie(object):
         """Return True if the string is in the trie, False if not."""
         string = string.lower()
         trace = self.root
-        for letter in string:
+        for idx, letter in enumerate(string):
             if letter in trace.children:
                 trace = trace.children[letter]
-                if trace.end is True:
+                if trace.end is True and idx == len(string) - 1:
                     return True
+                elif trace.end is False and idx == len(string) - 1:
+                    return False
             else:
                 return False
 
@@ -61,12 +64,21 @@ class Trie(object):
             raise ValueError('This word is not in the tree.')
         else:
             string = string.lower()
-            parent = None
             trace = self.root
             for letter in string:
-                if letter in trace.children:
-                    parent = trace
-                    trace = trace.children[letter]
-                    if 
-                else:
-                    return False
+                trace = trace.children[letter]
+            if len(trace.children) > 0:
+                trace.end = False
+            else:
+                last = None
+                while True:
+                    if trace.letter == 'root':
+                        del trace.children[last]
+                        break
+                    elif len(trace.children) <= 1:
+                        last = trace.letter
+                        trace = trace.parent
+                    else:
+                        del trace.children[last]
+                        break
+            self._size -= 1

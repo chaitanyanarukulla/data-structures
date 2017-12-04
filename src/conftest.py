@@ -64,3 +64,21 @@ def trie():
     """Create a new Trie."""
     from trie import Trie
     return Trie()
+
+
+@pytest.fixture
+def trie_10_words():
+    """Create a new Trie."""
+    from trie import Trie
+    new = Trie()
+    new.insert('Christmas')
+    new.insert('Lights')
+    new.insert('Carol')
+    new.insert('Stocking')
+    new.insert('Present')
+    new.insert('Tree')
+    new.insert('Cookie')
+    new.insert('Spirit')
+    new.insert('Party')
+    new.insert('Sweater')
+    return new
