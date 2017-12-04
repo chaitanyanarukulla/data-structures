@@ -46,7 +46,7 @@ class Graph(object):
             for key in self._graph:
                 for i in self._graph[key]:
                     if i == val:
-                        del self._graph[key]
+                        del self._graph[key][val]
         else:
             raise ValueError('There is no node of that value in the graph.')
 
@@ -54,7 +54,7 @@ class Graph(object):
         """Delete edge between val1 & val2 from graph."""
         try:
             if val2 in self._graph[val1]:
-                del self._graph[val1]
+                del self._graph[val1][val2]
             else:
                 raise ValueError('These edges do not exist.')
         except KeyError:
@@ -69,22 +69,25 @@ class Graph(object):
 
     def neighbors(self, val):
         """Return list of nodes connected node(val)."""
-        neighbors = []
         try:
+            self.graph[val]
+            neighbors = []
             for key in self._graph[val]:
-                neighbors.append(key)
-            return neighbors
+                if val in self._graph[key]:
+                    if self._graph[key] not in neighbors:
+                        neighbors.append(self._graph[key])
+            else:
+                return neighbors
         except KeyError:
             raise ValueError('This node dosent exit')
 
     def adjacent(self, val1, val2):
         """Return true if edge between vals, else false, & error if no val."""
-        if val1 in self._graph or val2 in self._graph:
-            if val1 in self._graph[val2]:
-                return True
+        if val1 in self._graph and val2 in self._graph:
             if val2 in self._graph[val1]:
                 return True
-            return False
+            else:
+                return False
         else:
             raise ValueError('These edges do not exist.')
 
