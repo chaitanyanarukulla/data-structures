@@ -14,10 +14,10 @@ class Graph(object):
 
     def edges(self):
         """Return a list of edges in graph."""
-        edges = {}
+        edges = []
         for key in self._graph:
             for i in self._graph[key]:
-                edges[(key, i)] = self._graph[key][i]
+                edges.append(key, i, self._graph[key][i])
         return edges
 
     def add_node(self, val):
