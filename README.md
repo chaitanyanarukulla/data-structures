@@ -153,7 +153,7 @@ new.size()
 
 ```
 
-### Binaary Heap (Binheap) Class Usage
+### Binaary Heap (min-heap) Class Usage
 
 ```
 To create an instance of a Binheap() class contained in package, from python:

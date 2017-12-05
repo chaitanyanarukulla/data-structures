@@ -56,7 +56,7 @@ class Binheap(object):
                 l_child = idx * 2 + 1
                 r_child = idx * 2 + 2
                 if r_child <= self._size - 1 and l_child <= self._size - 1:
-                    if self.heaplist[l_child] > self.heaplist[r_child]:
+                    if self.heaplist[l_child] >= self.heaplist[r_child]:
                         if self.heaplist[r_child] < self.heaplist[idx]:
                             self.heaplist[r_child], self.heaplist[idx] =\
                                 self.heaplist[idx], self.heaplist[r_child]

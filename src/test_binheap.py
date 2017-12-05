@@ -76,3 +76,15 @@ def test_pop_returns_sorted_values_limited(ebh):
     ebh.push(29)
     all_popped = [ebh.pop() for i in range(7)]
     assert all_popped == [2, 6, 17, 23, 29, 30, 50]
+
+
+def test_push_pop_():
+    """Test push iterable and pop."""
+    from binheap import Binheap
+    b = Binheap([5, 546, 7, 3, 54, 376, 87, 432, 432, 543,
+                 654, 63, 32, 325, 4, 654, 234, 32, 543, 6, 2,
+                 2, 4, 6, 87, 5, 6, 34, 668, 675, 5])
+    out = [2, 2, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 32, 32, 34, 54,
+           63, 87, 87, 234, 325, 376, 432, 432, 543, 543, 546,
+           654, 654, 668, 675]
+    assert out == [b.pop() for x in out]
