@@ -43,6 +43,6 @@ class Priorityq(object):
     def peek(self):
         """View the hightest priority item."""
         if len(self._que) == 0:
-            raise IndexError('There are no items to view.')
+            return None
         else:
             return self._que[self._highest][0]
