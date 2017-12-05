@@ -63,23 +63,22 @@ class Trie(object):
         """Remove given string from trie. If not in tree, raise exception."""
         if self.contains(string) is False:
             raise ValueError('This word is not in the tree.')
+        string = string.lower()
+        trace = self.root
+        for letter in string:
+            trace = trace.children[letter]
+        if len(trace.children) > 0:
+            trace.end = False
         else:
-            string = string.lower()
-            trace = self.root
-            for letter in string:
-                trace = trace.children[letter]
-            if len(trace.children) > 0:
-                trace.end = False
-            else:
-                last = None
-                while True:
-                    if trace.letter == 'root':
-                        del trace.children[last]
-                        break
-                    elif len(trace.children) <= 1:
-                        last = trace.letter
-                        trace = trace.parent
-                    else:
-                        del trace.children[last]
-                        break
-            self._size -= 1
+            last = None
+            while True:
+                if trace.letter == 'root':
+                    del trace.children[last]
+                    break
+                elif len(trace.children) <= 1:
+                    last = trace.letter
+                    trace = trace.parent
+                else:
+                    del trace.children[last]
+                    break
+        self._size -= 1
