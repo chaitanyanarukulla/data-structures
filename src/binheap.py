@@ -11,6 +11,9 @@ class Binheap(object):
         if isinstance(iterable, (list, tuple)):
             for item in iterable:
                 self.push(item)
+        elif iterable is not None:
+            raise TypeError('You must Iniitialize with '
+                            'an iterable or no value at all.')
 
     def push(self, val):
         """Push a value to the end of heap and sort up."""
@@ -60,14 +63,15 @@ class Binheap(object):
                             idx = r_child
                         else:
                             sort_down = False
+                    elif self.heaplist[l_child] < self.heaplist[r_child]:
+                        if self.heaplist[l_child] < self.heaplist[idx]:
+                            self.heaplist[idx], self.heaplist[l_child] =\
+                                self.heaplist[l_child], self.heaplist[idx]
+                            idx = l_child
+                        else:
+                            sort_down = False
                     else:
-                        if self.heaplist[l_child] < self.heaplist[r_child]:
-                            if self.heaplist[l_child] < self.heaplist[idx]:
-                                self.heaplist[idx], self.heaplist[l_child] =\
-                                    self.heaplist[l_child], self.heaplist[idx]
-                                idx = l_child
-                            else:
-                                sort_down = False
+                        sort_down = False
                 elif l_child == self._size - 1:
                     if self.heaplist[l_child] < self.heaplist[idx]:
                         self.heaplist[idx], self.heaplist[l_child] =\
