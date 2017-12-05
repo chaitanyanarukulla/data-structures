@@ -17,7 +17,7 @@ class Graph(object):
         edges = []
         for key in self._graph:
             for i in self._graph[key]:
-                edges.append(key, i, self._graph[key][i])
+                edges.append((key, i, self._graph[key][i]))
         return edges
 
     def add_node(self, val):
@@ -70,9 +70,12 @@ class Graph(object):
     def neighbors(self, val):
         """Return list of nodes connected node(val)."""
         try:
-            self.graph[val]
+            self._graph[val]
             neighbors = []
             for key in self._graph[val]:
+                if key not in neighbors:
+                    neighbors.append(key)
+            for key in self._graph:
                 if val in self._graph[key]:
                     if self._graph[key] not in neighbors:
                         neighbors.append(self._graph[key])
