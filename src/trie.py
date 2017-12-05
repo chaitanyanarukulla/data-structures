@@ -41,6 +41,8 @@ class Trie(object):
 
     def contains(self, string):
         """Return True if the string is in the trie, False if not."""
+        if not isinstance(string, str):
+            raise TypeError('You must search for a word.')
         string = string.lower()
         trace = self.root
         for idx, letter in enumerate(string):
