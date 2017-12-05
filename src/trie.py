@@ -27,18 +27,17 @@ class Trie(object):
         """
         if not isinstance(string, str):
             raise TypeError('You must enter a word.')
-        else:
-            string = string.lower()
-            trace = self.root
-            for letter in string:
-                if letter in trace.children:
-                    trace = trace.children[letter]
-                else:
-                    trace.children[letter] = Node(letter)
-                    trace.children[letter].parent = trace
-                    trace = trace.children[letter]
-            trace.end = True
-            self._size += 1
+        string = string.lower()
+        trace = self.root
+        for letter in string:
+            if letter in trace.children:
+                trace = trace.children[letter]
+            else:
+                trace.children[letter] = Node(letter)
+                trace.children[letter].parent = trace
+                trace = trace.children[letter]
+        trace.end = True
+        self._size += 1
 
     def contains(self, string):
         """Return True if the string is in the trie, False if not."""
