@@ -49,7 +49,8 @@ def test_add_two_edges(g):
     g.add_node(9)
     g.add_edge(5, 7)
     g.add_edge(7, 9)
-    assert g.edges() == [(5, 7, 0), (7, 9, 0)]
+    assert (5, 7, 0) in [(5, 7, 0), (7, 9, 0)]
+    assert (7, 9, 0) in [(5, 7, 0), (7, 9, 0)]
 
 
 def test_add_edges_will_add_mutipule_edges_to_a_node(g):
@@ -61,7 +62,9 @@ def test_add_edges_will_add_mutipule_edges_to_a_node(g):
     g.add_edge(5, 7)
     g.add_edge(5, 9)
     g.add_edge(5, 10)
-    assert g.edges() == [(5, 7, 0), (5, 9, 0), (5, 10, 0)]
+    assert (5, 7, 0) in [(5, 7, 0), (5, 9, 0), (5, 10, 0)]
+    assert (5, 9, 0) in [(5, 7, 0), (5, 9, 0), (5, 10, 0)]
+    assert (5, 10, 0) in [(5, 7, 0), (5, 9, 0), (5, 10, 0)]
 
 
 def test_add_edges_with_one_val_in_graph_add_second_val(g):
@@ -73,7 +76,9 @@ def test_add_edges_with_one_val_in_graph_add_second_val(g):
     g.add_edge(5, 7)
     g.add_edge(5, 9)
     g.add_edge(5, 15)
-    assert g.edges() == [(5, 7, 0), (5, 9, 0), (5, 15, 0)]
+    assert (5, 7, 0) in g.edges()
+    assert (5, 9, 0) in g.edges()
+    assert (5, 15, 0) in g.edges()
 
 
 def test_add_edges_with_first_val_new_and_second_val_in_graph(g):
@@ -378,7 +383,9 @@ def test_add_edges_w_weights_will_add_mutipule_edges_to_a_node(g):
     g.add_edge(5, 7, 4)
     g.add_edge(5, 9)
     g.add_edge(5, 10, 12039)
-    assert g.edges() == [(5, 7, 4), (5, 9, 0), (5, 10, 12039)]
+    assert (5, 7, 4) in g.edges()
+    assert (5, 9, 0) in g.edges()
+    assert (5, 10, 12039) in g.edges()
 
 
 def test_add_edges_with_weights_with_one_val_in_graph_add_second_val(g):
@@ -390,7 +397,9 @@ def test_add_edges_with_weights_with_one_val_in_graph_add_second_val(g):
     g.add_edge(5, 7, 0)
     g.add_edge(5, 9, 3)
     g.add_edge(5, 15, 6)
-    assert g.edges() == [(5, 7, 0), (5, 9, 3), (5, 15, 6)]
+    assert (5, 7, 0) in g.edges()
+    assert (5, 9, 3) in g.edges()
+    assert (5, 15, 6) in g.edges()
 
 
 def test_add_edges_w_weights_with_first_val_new_and_second_val_in_graph(g):
