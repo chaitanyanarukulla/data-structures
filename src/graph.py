@@ -76,9 +76,9 @@ class Graph(object):
                 if key not in neighbors:
                     neighbors.append(key)
             for key in self._graph:
-                if val in self._graph[key]:
-                    if self._graph[key] not in neighbors:
-                        neighbors.append(self._graph[key])
+                for child in self._graph[key]:
+                    if child == val and key not in neighbors:
+                        neighbors.append(key)
             else:
                 return neighbors
         except KeyError:
