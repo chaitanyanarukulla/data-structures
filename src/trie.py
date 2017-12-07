@@ -82,3 +82,7 @@ class Trie(object):
                     del trace.children[last]
                     break
         self._size -= 1
+
+    def trie_traversal(self, string):
+        """Traverse the depth of the trie from string, else root."""
+        
