@@ -325,3 +325,15 @@ Pass in a list of numbers bubble_sort(list).
 * _bubble_sort(list) (O(n^2))_
 
 ```
+
+### Insert Sort
+
+```
+Insert sort takes in a list of numbers and uses an insert sort method to return a sorted list. 
+
+To use insert_sort, from insert_sort import insert_sort.
+Pass in a list of numbers insert_sort(list).
+
+* _bubble_sort(list) (O(n^2))_
+
+```
