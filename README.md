@@ -1,4 +1,17 @@
 
+# data-structures
+### Insert Sort
+
+```
+Insert sort takes in a list of numbers and uses an insert sort method to return a sorted list. 
+
+To use insert_sort, from insert_sort import insert_sort.
+Pass in a list of numbers insert_sort(list).
+
+* _bubble_sort(list) (O(n^2))_
+
+```
+
 # Data-Structures
 
 Where a variety of data-structures found in python are being explored, such as:
