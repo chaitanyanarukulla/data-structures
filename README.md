@@ -1,9 +1,7 @@
-# data-structures
-
 ### Trie
 
 ```
-In order to efficiently store words, Trie() will provide a class by which nodes are only inserted if unshared by anthor word. All words share previous characters when possible. 
+In order to efficiently store words, Trie() will provide a class by which nodes are only inserted if unshared by anthor word. All words share previous characters when possible.
 
 To create an instance if the trie, Trie(), from python:
 
